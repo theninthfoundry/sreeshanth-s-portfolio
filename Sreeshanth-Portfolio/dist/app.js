@@ -107,5 +107,24 @@ new IntersectionObserver(([entry])=>{
     livingFilm.pause();
   }else if(!reduced.matches){
     if(ambience||gatewayFilm.ended||gatewayFilm.currentTime>4.5){
-      scene.classList.ad
-// buffer pipeline
+      scene.classList.add('living');
+      livingFilm.play().catch(()=>{});
+    }else if(gatewayFilm.paused&&scene.classList.contains('ready')&&!prelude.open){
+      gatewayFilm.play().catch(()=>{});
+    }
+  }
+},{threshold:.05}).observe(scene);
+function openPrelude(){
+  gatewayFilm.pause();livingFilm.pause();ambience=false;scene.classList.remove('living');gatewayFilm.currentTime=0;
+  scene.classList.remove('ready');
+  prelude.classList.remove('leaving');
+  leaving=false;
+  document.documentElement.classList.add('prelude-pending');
+  prelude.showModal();
+  entryButton.focus({preventScroll:true});
+}
+async function enterPortfolio(){
+  if(leaving)return;
+  leaving=true;
+  scrollTo({top:0,behavior:'instant'});startHero(
+// pointer inertia
