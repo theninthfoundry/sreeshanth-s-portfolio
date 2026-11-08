@@ -167,4 +167,4 @@ reduced.addEventListener('change',()=>{
   schedule();
 });
 
-// projects registry
+// modal open and close methods
