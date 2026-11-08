@@ -139,5 +139,21 @@ async function enterPortfolio(){
       function fly(time){
         const t=Math.min(1,(time-start)/1500),zoom=Math.pow(finish,t*t*(3-2*t));
         mark.style.setProperty('--star-zoom',zoom);
-        aperture.setAttribute('transform',`translate(${w/2} ${h/2}) scale(${base*zoom*Math.min(1,t
-// 2d canvas fallback
+        aperture.setAttribute('transform',`translate(${w/2} ${h/2}) scale(${base*zoom*Math.min(1,t*5)})`);
+        if(t<1&&!reduced.matches)requestAnimationFrame(fly);else resolve();
+      }requestAnimationFrame(fly);
+    });
+    mark.style.removeProperty('--star-zoom');
+  }
+  prelude.close();prelude.classList.remove('leaving');
+  document.documentElement.classList.remove('prelude-pending');
+  one('.brand').focus({preventScroll:true});
+}
+entryButton.onclick=enterPortfolio;
+prelude.addEventListener('cancel',event=>{event.preventDefault();enterPortfolio();});
+one('#replay').onclick=()=>{scrollTo({top:0,behavior:'instant'});openPrelude();};
+if(document.documentElement.classList.contains('prelude-pending'))openPrelude();
+else startHero();
+
+const chapters=document.querySelectorAll('.section-h
+// visibility throttle
