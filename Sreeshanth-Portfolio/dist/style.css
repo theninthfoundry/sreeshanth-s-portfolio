@@ -283,3 +283,8 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 /* Hero refinement: edge-to-edge video, cloud occlusion, reserved chapters. */
 .gate{background:transparent}
 .gateway-living{opacity:0;pointer-events:none;transition:opacity .45s ease}
+.scene.living .gateway-living{opacity:var(--film-opacity,1)}
+.gate .portal-opening{mask-image:none;-webkit-mask-image:none}
+.ride-stage{background:#193764 url(art/bookcloth.webp) center/440px}
+.horse{transform:scale(calc((1.21 - var(--p,.5)*.2)*.85)) translateY(calc((.5 - var(--p,.5))*1.8%))}
+.future-section{position:relative;isolation:isolate;min-height:100svh;overflow:hidden;background:#142b58}
