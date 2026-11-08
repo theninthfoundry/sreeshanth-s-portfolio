@@ -167,4 +167,4 @@ reduced.addEventListener('change',()=>{
   schedule();
 });
 
-// modal open and close methods
+// modal focus trapping
