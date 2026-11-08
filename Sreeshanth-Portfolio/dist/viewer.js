@@ -15,5 +15,8 @@ function openArtwork(images,start,name){
   displayArtwork();viewer.showModal();document.documentElement.classList.add('viewing');
 }
 function turnArtwork(step){position=(position+step+items.length)%items.length;displayArtwork();}
-one('#close-view').onclick=()=>view
-// pan physics
+one('#close-view').onclick=()=>viewer.close();
+viewer.addEventListener('close',()=>document.documentElement.classList.remove('viewing'));
+viewer.addEventListener('click',event=>{if(event.target===viewer){const r=viewer.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)viewer.close();}});
+viewer.addEventListener('keydown',event=>{if(event.key==='ArrowRight')turnArtwork(1);if(event.key==='ArrowLeft')turnArtwork(-1);});
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>turnArtwork(Number(b.dataset.view)));
