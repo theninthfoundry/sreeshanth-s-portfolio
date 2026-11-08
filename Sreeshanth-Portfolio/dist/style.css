@@ -53,3 +53,23 @@ header{height:60px;padding:0 3.5%;border:0;pointer-events:none}header a,header b
 .name-flourish g path{stroke-dasharray:1;stroke-dashoffset:1;animation:engrave 1.15s cubic-bezier(.29,.12,.28,1) 2.85s forwards}
 .below g path{animation-delay:3.13s}.jewel{transform-box:fill-box;transform-origin:center;animation:diamond .65s 2.75s both}
 @keyframes engrave{to{stroke-dashoffset:0}}@keyframes diamond{from{opacity:0;transform:scale(.25)}to{opacity:1;transform:scale(1)}}
+.scene:not(.ready) .name-flourish *{animation-play-state:paused}.poster-type{animation-delay:2.7s}
+.rise{animation-name:stone-lift;animation-duration:2.12s;animation-timing-function:cubic-bezier(.21,.72,.14,1)}
+@keyframes stone-lift{from{transform:translateY(1140px)}to{transform:translateY(0)}}
+.entrance{animation-delay:2.65s}.poster-advisory{top:20%}
+.cloud-crossing{position:fixed;inset:0;z-index:8;pointer-events:none;overflow:hidden;visibility:hidden;opacity:var(--presence,0)}
+.cloud-crossing[data-active]{visibility:visible}.cloud{position:absolute;max-width:none;height:auto;pointer-events:none;will-change:transform}
+.far{width:103%;left:10%;top:60%;transform:translate3d(calc((var(--phase) - .5)*-14%),calc(var(--phase)*-66%),0) scale(1.05)}
+.west{width:115%;left:-54%;top:40%;transform:translate3d(calc(var(--phase)*71%),calc(var(--phase)*-77%),0) scale(calc(.94 + var(--phase)*.24))}
+.east{width:139%;right:-63%;top:32%;transform:translate3d(calc(var(--phase)*-52%),calc(var(--phase)*-56%),0) scaleX(-1)}
+.near{width:160%;left:-40%;top:88%;transform:translate3d(calc(var(--phase)*5%),calc(var(--phase)*-68%),0) scale(calc(.9 + var(--phase)*.42))}
+@media(max-width:680px){.signature{top:45%;gap:13px}.cloud{min-width:118svh}.poster-advisory{top:22%}}
+@media(prefers-reduced-motion:reduce){.cloud-crossing{display:none}.name-flourish path{stroke-dashoffset:0;animation:none}.poster-type{animation:none}}
+:root{--ink:#172e38;--rule:#a9aaa0;--gold:#e5cc91}
+body{color:var(--ink)}
+/* The advisory on the cover opens the unabridged first poster. */
+#open-poster{border:0;padding:0;pointer-events:auto;cursor:zoom-in;transition:filter .25s}
+#open-poster:hover{filter:drop-shadow(0 4px 8px #17283660)}
+header nav{min-width:210px;padding:8px 18px;background:#fffefa}
+header nav a{padding:12px 0;border-bottom:1px solid #d8d6cc}
+header nav a:last-child{border:0}.poster-foot a:hover b{transform:translateY(3px)}.poster-foot b,.leaf-tab b{transition:transform .25s}
