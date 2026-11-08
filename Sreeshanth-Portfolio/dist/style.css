@@ -258,3 +258,18 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   .scene.flight-ended *{
     visibility:hidden!important;
     pointer-events:none!important
+  }
+  .ride{margin-top:-100svh;position:relative;z-index:1}
+}
+@media(max-width:700px){.work-orbit{height:calc(var(--wheel)*.79)}}
+/* The depth archive — perspective-rendered WebGL stage. */
+.work-depth{position:relative;height:290svh;z-index:2;color:#f8f1de;background:#152d55 url(art/bookcloth.webp) center/440px;scroll-margin-top:0}
+.depth-stage{position:sticky;top:0;height:100svh;min-height:650px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 52%,#040e25dd 0%,#0718319c 32%,transparent 74%)}
+.depth-stage:after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(#1027501f,transparent 22%,transparent 72%,#1027508a)}
+.depth-title{position:absolute;left:5%;top:7%;z-index:3;pointer-events:none}.depth-title small{font-size:9px;color:#d9c295;letter-spacing:.16em}.depth-title h2{font:normal clamp(31px,4vw,65px)/.89 Folio;letter-spacing:-.045em;margin:18px 0}.depth-title em{font-family:Pen;font-size:1.13em;font-weight:normal;color:#eddbb7}
+.depth-coordinate{position:absolute;right:5%;top:8%;z-index:3;text-align:right;font:9px/1.8 monospace;letter-spacing:.12em;color:#c4cbd6}
+#depth-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;touch-action:pan-y;cursor:grab}#depth-canvas:active{cursor:grabbing}
+.depth-portal{position:absolute;left:50%;top:49%;width:23vw;height:32vh;transform:translate(-50%,-50%);border-radius:50%;background:#030b1d;box-shadow:0 0 70px 28px #040b1f,0 0 140px 50px #4576b32b;opacity:.6;pointer-events:none}
+.depth-guide{position:absolute;left:5%;bottom:19%;z-index:3;display:flex;align-items:center;gap:14px;font:8px monospace;letter-spacing:.1em;color:#d4d9e2;pointer-events:none}.depth-guide i{width:28px;height:1px;background:#bca77a}
+.depth-controls{position:absolute;bottom:7%;left:5%;right:5%;display:flex;align-items:center;justify-content:space-between;gap:20px;z-index:4;border-top:1px solid #cfb98166;padding-top:18px}.depth-projects{display:flex;gap:5px;flex-wrap:wrap}.depth-projects button{background:transparent;border:1px solid transparent;color:#b5c2d5;padding:12px 14px;font:10px monospace;transition:color .2s,border-color .2s}.depth-projects button[aria-pressed=true]{color:#fff0cb;border-color:#c7ad796b;background:#142644a6}.depth-projects button:hover{color:white}
+#depth-open{display:flex;gap:44px;align-items:center;border:0;border-bottom:1px solid #d5ba82;background:none;color:#f3dfb4;padding:10px 0;font:italic 27px Folio;white-space:nowrap}#depth-open span{font:22px Arial}
