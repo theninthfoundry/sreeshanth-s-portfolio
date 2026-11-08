@@ -43,5 +43,18 @@ function renderFlight(t,scene){
   
   scene.style.setProperty('--film-opacity',1-smooth(.25,.55,t));
   scene.style.setProperty('--type-opacity',1-smooth(.04,.28,t));
-  crossing.style.setProperty('--bloom',s
-// flight scroll tracker initialized
+  crossing.style.setProperty('--bloom',smooth(.10,.35,t)*(1-smooth(.55,.82,t)));
+  crossing.style.setProperty('--words',smooth(.16,.36,t)*(1-smooth(.48,.68,t)));
+  clouds.forEach((cloud,i)=>{
+    const [x,y,ex,ey]=poses[i],enter=smooth(.01*i,.38+.01*i,t),exit=smooth(.48+.008*i,.95,t);
+    cloud.style.transform=`translate3d(${x*(1-enter)+ex*exit}%,${y*(1-enter)+ey*exit}%,0) scale(${.85+enter*.7+exit*1.3})`;
+    cloud.style.opacity=smooth(0,.14+.01*i,t)*(1-smooth(.65,.93,t));
+  });
+}
+let pending=false;
+function paint(){
+  pending=false;
+  if(reduced.matches) return;
+  const gate=one('.gate'), scene=one('.scene'), ride=one('.ride');
+  
+// cloud zoom interpolation
