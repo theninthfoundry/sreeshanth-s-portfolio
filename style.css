@@ -138,3 +138,23 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .signature em.lettering{animation:sign-in .95s 2.95s cubic-bezier(.18,.7,.23,1) both}
 @keyframes sign-in{from{clip-path:inset(-25% 100% -30% -8%)}to{clip-path:inset(-25% -8% -30% -8%)}}
 .scene:not(.ready) em.lettering{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.signature em.lettering{animation:none}}
+.book-door{display:flex;align-items:center;gap:18px;padding:14px 16px 14px 10px;color:white;border-block:1px solid #ddc79b91;background:linear-gradient(90deg,#11254e3d,#10214d80);text-shadow:0 1px 8px #112041}
+.book-icon{width:36px;height:50px;display:grid;place-items:center;position:relative;background:#1c3464 url(art/bookcloth.webp) center/140px;border:1px solid #ccbb91;box-shadow:3px 2px 0 -1px #ece1ca,5px 3px 0 -2px #d9c99e;transform:rotate(-6deg);transition:transform .4s}
+.book-icon i{position:absolute;inset:2px 4px 2px 3px;border-left:1px solid #c0a36d}.book-icon b{font:italic 18px Folio;text-transform:none;color:#f4ddaa;letter-spacing:-2px}
+.door-type{display:grid;gap:4px}.door-type small{font-size:8px;color:#f2d8a5}.door-type strong{font:italic 32px/.95 Folio;text-transform:none;letter-spacing:-.04em}
+.door-arrow{font:18px Arial;margin-left:18px}.book-door:hover .book-icon,.book-door:focus-visible .book-icon{transform:rotate(-14deg) translateY(-3px)}
+.room-bar{display:flex;align-items:center;justify-content:space-between;padding:16px clamp(22px,6vw,95px);border-bottom:1px solid #d4d7d0}
+.room-return{font:11px Arial;display:inline-flex;gap:10px;align-items:center;padding:6px 0}.room-return span{font-size:18px}.room-mark{font:italic 32px Folio;letter-spacing:-3px}
+.reading-room .book{padding-top:clamp(30px,4vw,70px);padding-bottom:32px}
+.reading-room h1{font:normal clamp(52px,7.3vw,106px)/.87 Folio;letter-spacing:-.065em;margin:16px 0 8px}
+.reading-room h1 em{font-family:Pen,Folio,serif;color:#31535d;font-weight:400;font-style:normal}
+.reading-room .spread{height:clamp(355px,55svh,680px)}
+@media(max-width:700px){.book-door{gap:10px;padding:10px}.book-icon{width:26px;height:36px}.door-type strong{font-size:24px}.door-arrow{margin-left:0}.ride-name{bottom:18%}.reading-room .spread{height:clamp(365px,54svh,500px)}}
+.nav-star{display:block;width:38px;height:38px;object-fit:contain}
+.prelude-pending{overflow:hidden;background:#000}
+.prelude-pending body{background:#000}
+.prelude-pending #prelude:not([open])~*{visibility:hidden}
+#prelude{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;border:0;padding:0;background:#000;color:#f8f5ef;overflow:hidden}
+#prelude::backdrop{background:#000}
+#prelude[open]{display:block}
