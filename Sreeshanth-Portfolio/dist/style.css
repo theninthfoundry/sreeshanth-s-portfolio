@@ -223,3 +223,23 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .wheel-hub{transform:translateZ(-4px)}
 .star-matte{display:none;position:absolute;inset:0;width:100%;height:100%;fill:#000}
 #prelude.leaving,#prelude.leaving::backdrop{background:transparent;animation:none}
+#prelude.leaving .star-matte{display:block}
+#prelude.leaving .star-art{animation:none;transform:scale(var(--star-zoom,1));transform-origin:center;will-change:transform}
+#prelude.leaving .star-art img{scale:1;transition:none;filter:none}
+#prelude.leaving .enter-label{visibility:hidden}
+#prelude.leaving .corner{animation:depart .44s ease-in both}
+@keyframes depart{from{opacity:1;transform:rotate(var(--r))}to{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.84)}}
+.cloud-crossing{position:absolute;inset:0;z-index:8;isolation:isolate;pointer-events:none;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .25s ease}
+.cloud-crossing[data-active]{visibility:visible;opacity:1}
+.flight-cloud{position:absolute;height:auto;max-width:none;pointer-events:none;will-change:transform,opacity;filter:drop-shadow(0 20px 40px rgba(50,80,120,0.15));transform-origin:center center}
+.plane-0{left:-28%;bottom:-13%;width:max(90vw,98svh);z-index:3}
+.plane-1{right:-29%;bottom:-6%;width:max(91vw,99svh);z-index:3}
+.plane-2{left:-2%;bottom:-24%;width:max(105vw,115svh);z-index:4}
+.plane-3{left:-27%;top:-18%;width:max(83vw,86svh);z-index:1}
+.plane-4{right:-28%;top:-11%;width:max(82vw,86svh);z-index:2}
+.plane-5{left:4%;top:-35%;width:100%;z-index:1}
+.sun-shafts{position:absolute;inset:-50%;z-index:5;background:repeating-conic-gradient(from 12deg at 50% 50%,transparent 0deg 17deg,#fff6d759 20deg,transparent 27deg 45deg);opacity:calc(var(--bloom,0)*.4);mask-image:radial-gradient(#000,transparent 65%)}
+.flight-heading{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#213b50;opacity:var(--words,0);text-align:center;text-shadow:0 2px 16px white}
+.flight-heading span{font:clamp(38px,6vw,88px)/.9 Folio;letter-spacing:-.04em;margin-top:20px}.flight-heading em{display:block;font-family:Pen;font-size:1.2em}
+@media(prefers-reduced-motion:no-preference){
+  main{background:#091d49}
