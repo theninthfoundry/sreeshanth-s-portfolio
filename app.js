@@ -126,5 +126,18 @@ function openPrelude(){
 async function enterPortfolio(){
   if(leaving)return;
   leaving=true;
-  scrollTo({top:0,behavior:'instant'});startHero(
-// pointer inertia
+  scrollTo({top:0,behavior:'instant'});startHero();
+  await startFilm();
+  if(!reduced.matches){
+    const aperture=one('#star-opening'),mark=one('.star-art');
+    const base=mark.getBoundingClientRect().width*.073,w=prelude.clientWidth,h=prelude.clientHeight;
+    const finish=Math.hypot(w,h)*1.35/base;
+    aperture.setAttribute('transform',`translate(${w/2} ${h/2}) scale(.001)`);
+    prelude.classList.add('leaving');
+    await new Promise(resolve=>{
+      const start=performance.now();
+      function fly(time){
+        const t=Math.min(1,(time-start)/1500),zoom=Math.pow(finish,t*t*(3-2*t));
+        mark.style.setProperty('--star-zoom',zoom);
+        aperture.setAttribute('transform',`translate(${w/2} ${h/2}) scale(${base*zoom*Math.min(1,t
+// 2d canvas fallback
