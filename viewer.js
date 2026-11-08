@@ -12,5 +12,8 @@ function displayArtwork(){
 }
 function openArtwork(images,start,name){
   items=images;position=start;collectionName=name;
-  displayArtwork();view
-// zoom controls
+  displayArtwork();viewer.showModal();document.documentElement.classList.add('viewing');
+}
+function turnArtwork(step){position=(position+step+items.length)%items.length;displayArtwork();}
+one('#close-view').onclick=()=>view
+// pan physics
