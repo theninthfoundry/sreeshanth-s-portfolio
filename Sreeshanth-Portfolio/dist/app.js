@@ -155,5 +155,16 @@ one('#replay').onclick=()=>{scrollTo({top:0,behavior:'instant'});openPrelude();}
 if(document.documentElement.classList.contains('prelude-pending'))openPrelude();
 else startHero();
 
-const chapters=document.querySelectorAll('.section-h
-// visibility throttle
+const chapters=document.querySelectorAll('.section-head,.colophon');
+const appear=new IntersectionObserver(entries=>{
+  for(const entry of entries){
+    if(entry.isIntersecting){entry.target.classList.add('on-page');appear.unobserve(entry.target);}
+  }
+},{threshold:.16});
+chapters.forEach(chapter=>appear.observe(chapter));
+reduced.addEventListener('change',()=>{
+  if(reduced.matches)one('.cloud-crossing').removeAttribute('data-active');
+  schedule();
+});
+
+// context restoration
