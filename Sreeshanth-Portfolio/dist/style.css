@@ -243,3 +243,18 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .flight-heading span{font:clamp(38px,6vw,88px)/.9 Folio;letter-spacing:-.04em;margin-top:20px}.flight-heading em{display:block;font-family:Pen;font-size:1.2em}
 @media(prefers-reduced-motion:no-preference){
   main{background:#091d49}
+  .gate{height:165svh;position:relative;z-index:5;background:transparent;pointer-events:none}
+  .gate .poster-type,.gate .poster-foot{pointer-events:none;opacity:var(--type-opacity,1)}
+  .gate .poster-type button,.gate .poster-foot a{pointer-events:auto}
+  .gate .portal-opening{mask-image:radial-gradient(circle at 50% 52%,transparent max(0px,calc(var(--aperture,0px) - 12vmin)),#000 var(--aperture,0px))}
+  .gate.flight-ended,
+  .gate .scene.flight-ended,
+  .gate.flight-ended .scene,
+  .scene.flight-ended{
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important
+  }
+  .scene.flight-ended *{
+    visibility:hidden!important;
+    pointer-events:none!important
