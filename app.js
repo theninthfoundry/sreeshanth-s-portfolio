@@ -89,5 +89,23 @@ const prelude=one('#prelude');
 const scene=one('.scene');
 const entryButton=one('.star-entry');
 let leaving=false;
-f
-// webgl fragment shader
+function startHero(){scene.classList.add('ready')}
+async function startFilm(){
+  ambience=false;
+  livingFilm.pause();
+  livingFilm.currentTime=0;
+  scene.classList.remove('living');
+  gatewayFilm.currentTime=0;
+  gatewayFilm.controls=false;
+  try{await gatewayFilm.play()}catch{gatewayFilm.controls=true}
+}
+one('#film-sound').onclick=()=>{gatewayFilm.muted=!gatewayFilm.muted;one('#film-sound').textContent=gatewayFilm.muted?'Sound off':'Sound on';one('#film-sound').setAttribute('aria-pressed',String(!gatewayFilm.muted))};
+one('#film-replay').onclick=startFilm;
+new IntersectionObserver(([entry])=>{
+  if(!entry.isIntersecting){
+    gatewayFilm.pause();
+    livingFilm.pause();
+  }else if(!reduced.matches){
+    if(ambience||gatewayFilm.ended||gatewayFilm.currentTime>4.5){
+      scene.classList.ad
+// buffer pipeline
