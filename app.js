@@ -69,5 +69,25 @@ function paint(){
   ride.style.setProperty('--p',p);
   const trace=clamp((innerHeight*.96-riderTop)/(ride.offsetHeight+innerHeight*.12));
   ride.style.setProperty('--trace',trace);
-  const point=orbitPath.getPointAtLe
-// webgl vertex shader
+  const point=orbitPath.getPointAtLength(trace*orbitLength);
+  one('#orbit-star').setAttribute('transform','translate('+point.x+' '+point.y+')');
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(paint)}}
+addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);paint();
+
+const gatewayFilm=one('#gateway-film');
+const livingFilm=one('#gateway-living');
+let ambience=false;
+gatewayFilm.addEventListener('ended',async()=>{
+  if(reduced.matches)return;
+  ambience=true;
+  livingFilm.currentTime=0;
+  scene.classList.add('living');
+  try{await livingFilm.play()}catch{}
+});
+const prelude=one('#prelude');
+const scene=one('.scene');
+const entryButton=one('.star-entry');
+let leaving=false;
+f
+// webgl fragment shader
