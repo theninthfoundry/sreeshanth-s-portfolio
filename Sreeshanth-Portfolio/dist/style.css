@@ -203,3 +203,23 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .orbital-card span{display:flex;justify-content:space-between;align-items:baseline;gap:4px;padding:6%}.orbital-card small{font-size:clamp(5px,.54vw,9px);letter-spacing:.04em}.orbital-card em{font:italic clamp(17px,1.9vw,32px) Folio;letter-spacing:-.06em}
 #project-pop{width:min(610px,78vw,84svh);height:auto;overflow:visible;max-height:none;border:0;padding:0;background:transparent;color:var(--ink)}
 #project-pop[open]{display:block;animation:comic-pop .36s cubic-bezier(.17,.83,.29,1.17) both}
+#project-pop::backdrop{background:#0b1938ac;backdrop-filter:blur(3px)}
+#project-pop .cover{width:100%;margin:0;outline:2px solid #17263b;box-shadow:7px 9px 0 #10203e}
+#close-pop{position:absolute;z-index:2;top:-15px;right:-15px;width:36px;height:36px;border-radius:50%;background:#fff2dc;color:#17263b;border:2px solid #17263b;font:24px/1 Arial;box-shadow:2px 2px #17263b}
+@keyframes comic-pop{from{transform:scale(.64) rotate(-8deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.smoke-stage{position:fixed;inset:0;z-index:15;pointer-events:none;overflow:hidden}.smoke-puff{position:absolute;left:50%;top:50%;width:clamp(46px,8vw,105px);height:auto}
+.work-orbit+.colophon{padding-top:max(60px,5vh)}
+@media(max-width:700px){.work-orbit{--wheel:min(93vw,83svh);margin-block:0}.orbital-card span{flex-direction:column;gap:0}.orbital-card em{font-size:clamp(14px,4vw,21px)}.wheel-hub h2{font-size:clamp(32px,8vw,55px);margin:10px 0 4px}.wheel-hub small,#wheel-pause{font-size:7px}.wheel-arm{width:26%}}
+@media(prefers-reduced-motion:reduce){#project-pop[open]{animation:none}.project-wheel,.upright{animation-duration:72s!important}}
+
+.work-orbit{scroll-margin-top:8svh}
+/* A dimensional archive: each card travels through depth. */
+.work-orbit{height:calc(var(--wheel)*.71)}
+.orbital-layout{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);perspective:calc(var(--wheel)*1.45);perspective-origin:50% 50%;touch-action:pan-y;user-select:none;cursor:grab}
+.orbital-layout:active{cursor:grabbing}.wheel-frame{transform:rotateX(48.6deg);transform-origin:center}
+.project-wheel,.project-wheel.running,.upright,.running .upright{animation:none!important;transform-style:preserve-3d}
+.wheel-arm{width:26%;transform-style:preserve-3d}.orbital-card{transform-style:preserve-3d;box-shadow:1px 2px 0 #c9bd9f,2px 4px 0 #263650,3px 6px 0 #b7ad97,4px 8px 0 #182842,0 15px 24px #07152c66}
+.orbital-card:hover,.orbital-card:focus-visible{outline:2px solid #f0d9aa;outline-offset:3px}
+.wheel-hub{transform:translateZ(-4px)}
+.star-matte{display:none;position:absolute;inset:0;width:100%;height:100%;fill:#000}
+#prelude.leaving,#prelude.leaving::backdrop{background:transparent;animation:none}
