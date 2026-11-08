@@ -295,3 +295,5 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .scene.portal-opening .film-actions,
 .scene.flight-ended .film-actions,
 .gate.flight-ended .film-actions{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+
+/* Production release verified */
