@@ -166,5 +166,3 @@ reduced.addEventListener('change',()=>{
   if(reduced.matches)one('.cloud-crossing').removeAttribute('data-active');
   schedule();
 });
-
-// hero particle motes removed for natural atmosphere
