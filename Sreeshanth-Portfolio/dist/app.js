@@ -167,4 +167,4 @@ reduced.addEventListener('change',()=>{
   schedule();
 });
 
-// modal focus trapping
+// hero particle motes removed for natural atmosphere
