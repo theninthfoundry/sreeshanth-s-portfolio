@@ -158,3 +158,23 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 #prelude{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;border:0;padding:0;background:#000;color:#f8f5ef;overflow:hidden}
 #prelude::backdrop{background:#000}
 #prelude[open]{display:block}
+.entry-composition{position:absolute;inset:0;overflow:hidden;isolation:isolate}
+.star-entry{position:absolute;left:50%;top:50%;width:clamp(136px,16vw,236px);aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;color:white;padding:0;cursor:pointer}
+.star-art,.star-art img{display:block;width:100%;height:100%}
+.star-art{animation:star-ink 1.05s cubic-bezier(.16,.76,.2,1) both}
+.star-art img{object-fit:contain;transition:scale .4s;filter:drop-shadow(0 0 1px #fff9)}
+.star-entry:hover img{scale:1.055}
+.star-entry:focus:not(:focus-visible){outline:none}
+.star-entry:focus-visible{outline:1px dotted #c0af8a;outline-offset:10px}
+.enter-label{position:absolute;left:50%;top:calc(100% + 17px);transform:translateX(-50%);display:flex;align-items:center;gap:12px;white-space:nowrap;font:10px/1.4 'Courier New',monospace;letter-spacing:.15em;text-transform:uppercase;color:#dedbd0;padding:8px 0;border-bottom:1px solid #69645a;animation:entry-label .5s .9s both}
+.enter-label i{font:14px Arial}
+.corner{position:absolute;object-fit:contain;animation:corner-in .95s cubic-bezier(.16,.78,.23,1) var(--delay) both;pointer-events:none}
+.liberty{left:clamp(18px,5vw,100px);top:clamp(18px,5vh,78px);height:clamp(130px,27vh,280px);--x:-32px;--y:-24px;--r:-7deg;--delay:.14s}
+.banana{right:clamp(20px,6vw,110px);top:clamp(18px,7vh,82px);height:clamp(75px,15vh,170px);--x:28px;--y:-23px;--r:8deg;--delay:.42s}
+.racer{left:clamp(30px,9vw,150px);bottom:clamp(22px,6vh,84px);height:clamp(108px,22vh,235px);--x:-36px;--y:34px;--r:24deg;--delay:.54s}
+.violet{right:clamp(18px,4.7vw,90px);bottom:clamp(22px,5vh,80px);width:clamp(104px,15vw,245px);--x:33px;--y:22px;--r:-7deg;--delay:.28s}
+@keyframes star-ink{from{opacity:0;transform:scale(.65) rotate(-17deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes corner-in{from{opacity:0;transform:translate(var(--x),var(--y)) rotate(0deg)}to{opacity:1;transform:translate(0) rotate(var(--r))}}
+@keyframes entry-label{from{opacity:0}to{opacity:1}}
+#prelude.leaving{animation:prelude-exit .62s cubic-bezier(.64,0,.55,1) forwards}
+#prelude.leaving .star-art img{scale:1.25}
