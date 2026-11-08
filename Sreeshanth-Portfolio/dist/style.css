@@ -93,3 +93,28 @@ header nav a:last-child{border:0}.poster-foot a:hover b{transform:translateY(3px
 .work-stage{height:clamp(350px,38vw,560px);isolation:isolate;background:#f3f2ef;border:1px solid #e3e0d9}
 .work-art{width:100%;height:100%;inset:0;object-fit:cover;object-position:50% 50%;opacity:.9}
 .bubble{color:#ffd7ee;opacity:.9;font-size:clamp(78px,12vw,195px);top:0;left:6%;rotate:-5deg}
+.cover{position:relative;z-index:1;width:65%;margin:0;box-shadow:0 17px 30px -13px #14233566;outline:1px solid #182a320f;background:#faf7ef}
+.cover img{display:block;width:100%;aspect-ratio:620/420}.cover figcaption{padding:14px 18px 17px;display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid #152934}
+.cover figcaption small{font-size:8px;white-space:nowrap}.cover h3{margin:0;font:italic clamp(24px,3.5vw,54px)/1 Folio;letter-spacing:-.06em}
+.colophon{isolation:isolate;position:relative;display:flex;align-items:stretch;flex-direction:column;background:#142b58 url(art/bookcloth.webp) center/145px;color:#fff;padding:40px 7% 30px;border:0;overflow:hidden}
+.colophon:before{content:'';position:absolute;z-index:-1;inset:15px;border:1px solid #d0b88172;pointer-events:none}
+.binding{width:52px;height:52px;position:absolute;top:7px;mix-blend-mode:lighten;pointer-events:none}.left-binding{left:8px}.right-binding{right:8px;scale:-1 1}
+.footer-top,.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}.footer-top small{color:#e5d4ad}
+.signoff{text-align:center;font:clamp(48px,8.7vw,150px)/.9 Folio;letter-spacing:-.067em;padding:clamp(65px,8vw,136px) 0}
+.signoff em{font-family:Pen,Folio,serif;font-weight:400}
+.footer-bottom{border-top:1px solid #ddc99766;padding:20px 0 0}.footer-bottom nav{position:static;display:flex;gap:22px;box-shadow:none;border:0;background:none;padding:0}.footer-bottom nav a,.footer-bottom button{font:12px Arial;color:white;padding:8px 0}
+.footer-bottom button{border:0;background:none}.footer-bottom b{font-weight:400;margin-left:7px;color:var(--gold)}
+html.viewing{overflow:hidden}
+dialog{color:var(--ink);width:min(92vw,850px);height:min(90svh,900px);max-height:90svh;box-sizing:border-box;border:1px solid #bcc2b8;padding:18px 22px;background:white}
+dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1924c9}.viewer-head,.viewer-foot{display:flex;align-items:center;justify-content:space-between;gap:14px}.viewer-head h2{font:italic clamp(24px,3vw,38px) Folio;margin:0}.viewer-head button{background:none;border:0;font-size:28px;padding:3px 6px}.viewer-foot{padding-top:10px;border-top:1px solid #dddcd2;font:11px 'Courier New',monospace}.viewer-foot [hidden]{display:none}#view-art{flex:1;min-height:0;width:100%;object-fit:contain;margin:10px 0}
+@media(max-width:700px){.ride-name{bottom:12%}.ride-caption{bottom:3%}.book-index{gap:10px;align-items:baseline}.catalogue{display:flex;flex-direction:column-reverse;gap:15px;align-items:stretch;margin-top:12px}.work-stage{height:300px}.cover{width:70%}.catalogue-index button{padding:11px 3px}.catalogue-index span{font-size:25px}.footer-top,.footer-bottom{font-size:9px}.signoff em{display:block}.colophon{padding:38px 8% 27px}.footer-bottom{align-items:center}.footer-bottom nav{gap:10px}.footer-bottom nav a,.footer-bottom button{font-size:10px}.binding{width:35px;height:35px}.viewer-foot{font-size:9px}.book-index span:last-child{text-align:right}.cover figcaption{padding:10px;flex-direction:column;gap:3px}}
+@media(prefers-reduced-motion:reduce){.ride{height:auto}.horse{transform:none}}
+.entrance{animation:plate-settle .32s 2.64s both}
+@keyframes plate-settle{from{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}
+.colophon{background-size:440px auto}
+.catalogue-index b{font-family:Arial,sans-serif}
+/* The light passes once with the arrival of the stone. */
+.sun-pass{position:absolute;inset:-25%;z-index:1;pointer-events:none;mix-blend-mode:screen;background:linear-gradient(107deg,transparent 37%,#fff1d811 41%,#fff3c449 46%,#fff9df1c 50%,transparent 58%);animation:sun-through 2.8s 1.1s both}
+@keyframes sun-through{0%{transform:translateX(-60%);opacity:0}30%{opacity:.85}100%{transform:translateX(55%);opacity:0}}
+.signature .lettering{display:inline-block}.letter{display:inline-block;animation:set-type .82s cubic-bezier(.2,.75,.17,1) calc(2.64s + var(--n)*.035s) both}
+@keyframes set-type{from{opacity:0;transform:translateY(.36em) rotate(4deg);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
