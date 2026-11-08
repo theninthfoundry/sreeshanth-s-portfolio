@@ -167,4 +167,4 @@ reduced.addEventListener('change',()=>{
   schedule();
 });
 
-// context restoration
+// projects registry
