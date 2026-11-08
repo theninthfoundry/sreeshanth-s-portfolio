@@ -56,5 +56,18 @@ function paint(){
   pending=false;
   if(reduced.matches) return;
   const gate=one('.gate'), scene=one('.scene'), ride=one('.ride');
-  
-// cloud zoom interpolation
+  const scrollRange=Math.max(1,gate.offsetHeight-scene.offsetHeight);
+  const progress=clamp(-gate.getBoundingClientRect().top/scrollRange);
+  scene.style.setProperty('--drift',progress);
+  renderFlight(progress,scene);
+  if(progress<.06&&scene.classList.contains('ready')&&(ambience||gatewayFilm.ended||gatewayFilm.currentTime>4.5)){
+    if(!scene.classList.contains('living'))scene.classList.add('living');
+    if(livingFilm.paused)livingFilm.play().catch(()=>{});
+  }
+  const riderTop=ride.getBoundingClientRect().top;
+  const p=clamp((innerHeight*.65-riderTop)/(ride.offsetHeight-innerHeight*.35));
+  ride.style.setProperty('--p',p);
+  const trace=clamp((innerHeight*.96-riderTop)/(ride.offsetHeight+innerHeight*.12));
+  ride.style.setProperty('--trace',trace);
+  const point=orbitPath.getPointAtLe
+// webgl vertex shader
