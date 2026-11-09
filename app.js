@@ -1,3 +1,5 @@
+const one = window.one || (selector => document.querySelector(selector));
+const reduced = window.reduced || matchMedia('(prefers-reduced-motion: reduce)');
 const menu = one('#menu');
 const toggle = one('.menu-toggle');
 function setMenu(open) {
@@ -139,6 +141,7 @@ function replayEntranceMotion(){
   });
 }
 function openPrelude(){
+  prelude.style.display='';
   gatewayFilm.pause();livingFilm.pause();ambience=false;scene.classList.remove('living');gatewayFilm.currentTime=0;
   scene.classList.remove('ready');
   prelude.classList.remove('leaving');
@@ -154,29 +157,33 @@ async function enterPortfolio(){
   scrollTo({top:0,behavior:'instant'});startHero();
   await startFilm();
   if(!reduced.matches){
-    const aperture=one('#star-opening'),mark=one('.star-art');
-    const base=mark.getBoundingClientRect().width*.073,w=prelude.clientWidth,h=prelude.clientHeight;
-    const finish=Math.hypot(w,h)*1.35/base;
-    aperture.setAttribute('transform',`translate(${w/2} ${h/2}) scale(.001)`);
+    const mark=one('.star-art');
     prelude.classList.add('leaving');
     await new Promise(resolve=>{
-      const start=performance.now(),duration=1780;
+      const start=performance.now(),duration=1050;
       function fly(time){
         const t=Math.min(1,(time-start)/duration);
         const eased=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-        const zoom=Math.pow(finish,eased),flare=Math.sin(Math.PI*eased);
-        mark.style.setProperty('--star-zoom',zoom);
-        mark.style.setProperty('--portal-flare',flare);
-        aperture.setAttribute('transform',`translate(${w/2} ${h/2}) scale(${base*zoom*smooth(0,.2,t)})`);
+        const zoom=1 + 15 * eased;
+        const flare=Math.sin(Math.PI*eased);
+        if(mark){
+          mark.style.setProperty('--star-zoom', zoom);
+          mark.style.setProperty('--portal-flare', flare);
+        }
         if(t<1&&!reduced.matches)requestAnimationFrame(fly);else resolve();
       }requestAnimationFrame(fly);
     });
-    mark.style.removeProperty('--star-zoom');
-    mark.style.removeProperty('--portal-flare');
+    if(mark){
+      mark.style.removeProperty('--star-zoom');
+      mark.style.removeProperty('--portal-flare');
+    }
   }
-  prelude.close();prelude.classList.remove('leaving');
+  prelude.close();
+  prelude.classList.remove('leaving');
+  prelude.style.display='none';
   document.documentElement.classList.remove('prelude-pending');
   one('.brand').focus({preventScroll:true});
+  leaving=false;
 }
 entryButton.onclick=enterPortfolio;
 prelude.addEventListener('cancel',event=>{event.preventDefault();enterPortfolio();});

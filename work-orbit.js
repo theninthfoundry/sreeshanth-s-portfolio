@@ -1,4 +1,6 @@
 (()=>{
+const one = window.one || (selector => document.querySelector(selector));
+const reduced = window.reduced || matchMedia('(prefers-reduced-motion: reduce)');
 const names=['Otaru','Latent','Veil','SatQueryAI','Reloop'];
 const dialog=one('#project-pop'),smoke=one('.smoke-stage');let openedAt=0;
 function open(i){if(dialog.open)return;one('#cover-art').src='art/'+names[i].toLowerCase()+'.svg';one('#project-title').textContent=names[i];one('#work-num').textContent='Archive / 0'+(i+1);openedAt=performance.now();dialog.showModal()}
