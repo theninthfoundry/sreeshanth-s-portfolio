@@ -1,6 +1,8 @@
-const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-const one = selector => document.querySelector(selector);
-const viewer=one('#viewer');
+const reduced = window.reduced || matchMedia('(prefers-reduced-motion: reduce)');
+window.reduced = reduced;
+const one = window.one || (selector => document.querySelector(selector));
+window.one = one;
+const viewer = one('#viewer');
 let items=[], position=0, collectionName='';
 function displayArtwork(){
   const item=items[position];

@@ -1,7 +1,10 @@
+const one = window.one || (selector => document.querySelector(selector));
+const reduced = window.reduced || matchMedia('(prefers-reduced-motion: reduce)');
 const menu = one('#menu');
 const toggle = one('.menu-toggle');
 function setMenu(open) {
   toggle.setAttribute('aria-expanded',String(open));
+  toggle.setAttribute('aria-label',open?'Close index':'Open index');
   menu.hidden = !open;
 }
 toggle.onclick = () => setMenu(menu.hidden);
@@ -18,7 +21,14 @@ const orbitPath=one('#orbit-path');
 const orbitLength=orbitPath.getTotalLength();
 const smooth=(start,end,value)=>{const t=clamp((value-start)/(end-start));return t*t*(3-2*t)};
 const crossing=one('.cloud-crossing'),clouds=[...crossing.querySelectorAll('.flight-cloud')];
-const poses=[[-60,40,-120,-20],[60,50,120,-15],[0,80,0,-140],[-40,-30,-130,-40],[40,20,130,-25],[0,-80,0,-150]];
+const poses=[
+  {from:[-64,38],to:[-132,-16],scale:.78,tilt:-2.6,alpha:.57,sway:1.1,soft:1.1},
+  {from:[62,45],to:[136,-14],scale:.82,tilt:2.2,alpha:.52,sway:1.0,soft:.9},
+  {from:[0,86],to:[0,-154],scale:.94,tilt:.4,alpha:.56,sway:.55,soft:.45},
+  {from:[-30,-8],to:[-116,-62],scale:.72,tilt:-3,alpha:.38,sway:1.3,soft:1.25},
+  {from:[20,71],to:[116,13],scale:.88,tilt:1.4,alpha:.46,sway:.7,soft:.55},
+  {from:[44,-42],to:[156,-76],scale:.76,tilt:2.6,alpha:.38,sway:1.15,soft:1.3}
+];
 function renderFlight(t,scene){
   const gate=scene.closest('.gate')||one('.gate');
   const active=t>.003&&t<.97;
@@ -43,12 +53,21 @@ function renderFlight(t,scene){
   
   scene.style.setProperty('--film-opacity',1-smooth(.25,.55,t));
   scene.style.setProperty('--type-opacity',1-smooth(.04,.28,t));
-  crossing.style.setProperty('--bloom',smooth(.10,.35,t)*(1-smooth(.55,.82,t)));
-  crossing.style.setProperty('--words',smooth(.16,.36,t)*(1-smooth(.48,.68,t)));
+  const aperture=smooth(.12,.40,t)*(1-smooth(.64,.88,t));
+  crossing.style.setProperty('--bloom',aperture);
   clouds.forEach((cloud,i)=>{
-    const [x,y,ex,ey]=poses[i],enter=smooth(.01*i,.38+.01*i,t),exit=smooth(.48+.008*i,.95,t);
-    cloud.style.transform=`translate3d(${x*(1-enter)+ex*exit}%,${y*(1-enter)+ey*exit}%,0) scale(${.85+enter*.7+exit*1.3})`;
-    cloud.style.opacity=smooth(0,.14+.01*i,t)*(1-smooth(.65,.93,t));
+    const pose=poses[i],delay=i*.012;
+    const enter=smooth(.01+delay,.34+delay,t),exit=smooth(.50+delay*.45,.97+delay*.08,t);
+    const phase=t*Math.PI*2.1+i*.82;
+    const wind=Math.sin(phase),lift=Math.cos(phase*.78);
+    const x=pose.from[0]*(1-enter)+pose.to[0]*exit+wind*pose.sway;
+    const y=pose.from[1]*(1-enter)+pose.to[1]*exit+lift*pose.sway*.55;
+    const scale=pose.scale+enter*.46+exit*1.08+wind*.012;
+    const rotation=pose.tilt*(1-enter)-pose.tilt*.38*exit+wind*.18;
+    const fadeIn=smooth(.015+delay,.14+delay,t),fadeOut=1-smooth(.75+delay*.3,.98,t);
+    cloud.style.transform=`translate3d(${x}%,${y}%,0) rotate(${rotation}deg) scale(${scale})`;
+    cloud.style.opacity=fadeIn*fadeOut*pose.alpha;
+    cloud.style.setProperty('--cloud-softness',`${pose.soft+(1-enter)*.45}px`);
   });
 }
 let pending=false;
@@ -99,7 +118,7 @@ async function startFilm(){
   gatewayFilm.controls=false;
   try{await gatewayFilm.play()}catch{gatewayFilm.controls=true}
 }
-one('#film-sound').onclick=()=>{gatewayFilm.muted=!gatewayFilm.muted;one('#film-sound').textContent=gatewayFilm.muted?'Sound off':'Sound on';one('#film-sound').setAttribute('aria-pressed',String(!gatewayFilm.muted))};
+one('#film-sound').onclick=()=>{gatewayFilm.muted=!gatewayFilm.muted;const button=one('#film-sound');button.setAttribute('aria-pressed',String(!gatewayFilm.muted));button.setAttribute('aria-label',gatewayFilm.muted?'Turn sound on':'Turn sound off');button.dataset.sound=gatewayFilm.muted?'off':'on'};
 one('#film-replay').onclick=startFilm;
 new IntersectionObserver(([entry])=>{
   if(!entry.isIntersecting){
@@ -114,11 +133,20 @@ new IntersectionObserver(([entry])=>{
     }
   }
 },{threshold:.05}).observe(scene);
+function replayEntranceMotion(){
+  prelude.querySelectorAll('.corner,.star-art,.enter-label').forEach(element=>{
+    element.style.animation='none';
+    void element.offsetWidth;
+    element.style.removeProperty('animation');
+  });
+}
 function openPrelude(){
+  prelude.style.display='';
   gatewayFilm.pause();livingFilm.pause();ambience=false;scene.classList.remove('living');gatewayFilm.currentTime=0;
   scene.classList.remove('ready');
   prelude.classList.remove('leaving');
   leaving=false;
+  replayEntranceMotion();
   document.documentElement.classList.add('prelude-pending');
   prelude.showModal();
   entryButton.focus({preventScroll:true});
@@ -129,25 +157,33 @@ async function enterPortfolio(){
   scrollTo({top:0,behavior:'instant'});startHero();
   await startFilm();
   if(!reduced.matches){
-    const aperture=one('#star-opening'),mark=one('.star-art');
-    const base=mark.getBoundingClientRect().width*.073,w=prelude.clientWidth,h=prelude.clientHeight;
-    const finish=Math.hypot(w,h)*1.35/base;
-    aperture.setAttribute('transform',`translate(${w/2} ${h/2}) scale(.001)`);
+    const mark=one('.star-art');
     prelude.classList.add('leaving');
     await new Promise(resolve=>{
-      const start=performance.now();
+      const start=performance.now(),duration=1050;
       function fly(time){
-        const t=Math.min(1,(time-start)/1500),zoom=Math.pow(finish,t*t*(3-2*t));
-        mark.style.setProperty('--star-zoom',zoom);
-        aperture.setAttribute('transform',`translate(${w/2} ${h/2}) scale(${base*zoom*Math.min(1,t*5)})`);
+        const t=Math.min(1,(time-start)/duration);
+        const eased=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+        const zoom=1 + 15 * eased;
+        const flare=Math.sin(Math.PI*eased);
+        if(mark){
+          mark.style.setProperty('--star-zoom', zoom);
+          mark.style.setProperty('--portal-flare', flare);
+        }
         if(t<1&&!reduced.matches)requestAnimationFrame(fly);else resolve();
       }requestAnimationFrame(fly);
     });
-    mark.style.removeProperty('--star-zoom');
+    if(mark){
+      mark.style.removeProperty('--star-zoom');
+      mark.style.removeProperty('--portal-flare');
+    }
   }
-  prelude.close();prelude.classList.remove('leaving');
+  prelude.close();
+  prelude.classList.remove('leaving');
+  prelude.style.display='none';
   document.documentElement.classList.remove('prelude-pending');
   one('.brand').focus({preventScroll:true});
+  leaving=false;
 }
 entryButton.onclick=enterPortfolio;
 prelude.addEventListener('cancel',event=>{event.preventDefault();enterPortfolio();});

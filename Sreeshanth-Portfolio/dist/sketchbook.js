@@ -1,3 +1,5 @@
+const one = window.one || (selector => document.querySelector(selector));
+const reduced = window.reduced || matchMedia('(prefers-reduced-motion: reduce)');
 const pages = [
   {name:'Built for speed', images:[[4,7,6,34,69,-6],[3,48,6,34,46,8],[7,79,27,15,63,5],[9,39,44,13,17,-10],[5,53,55,26,37,-7]]},
   {name:'A little louder', images:[[8,8,6,27,69,-5],[12,46,12,36,50,5],[10,33,9,12,20,-12],[13,57,68,27,19,-6],[6,83,20,11,22,6]]},

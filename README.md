@@ -4,7 +4,7 @@ A cinematic, editorial web portfolio combining classical linework, surrealist co
 
 ## Highlights
 
-- **The Gateway**: Cinematic 4K entrance film with seamless ambient loop and natural floral inpainting.
+- **The Gateway**: Text-free cinematic 4K entrance film with fine linework, seamless ambient motion, and icon-only controls.
 - **Ascension Through Clouds**: Multi-plane parallax cloud flight synchronized with scroll dynamics.
 - **The Rider**: Classical rearing steed linework with elliptical celestial constellation orbit tracing.
 - **Depth Field**: Interactive 3D WebGL project archive featuring spatial perspective and inertia controls.
