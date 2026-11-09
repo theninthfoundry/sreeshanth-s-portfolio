@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#091d49">
   <meta name="description" content="The personal portfolio and visual sketchbook of Sreeshanth Namireddy.">
   <title>Sreeshanth Namireddy — Portfolio</title>
-  <link rel="stylesheet" href="style.css?v=motion-03">
+  <link rel="stylesheet" href="style.css?v=hero-lines-01">
   <link rel="icon" href="art/prelude/star.webp">
   <link rel="preload" as="image" href="art/prelude/star.webp">
   <script>
@@ -42,7 +42,7 @@
     <a class="brand" href="#gate" aria-label="Sreeshanth Namireddy, home">
       <img class="nav-star" src="art/prelude/star.webp" alt="">
     </a>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">Index <i></i></button>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Open index"><i aria-hidden="true"></i></button>
     <nav id="menu" hidden>
       <a href="#gate">The gateway</a>
       <a href="#rider">The rider</a>
@@ -63,23 +63,23 @@
           <img class="flight-cloud plane-3" src="art/cloud-cirrus-veil.webp" alt="">
           <img class="flight-cloud plane-4" src="art/cloud-volumetric-bank.webp" alt="">
           <img class="flight-cloud plane-5" src="art/cloud-needle-crest.webp" alt="">
-          <div class="flight-heading">
-            <small>Transition / II</small>
-            <span>Ascension <em>Through Clouds</em></span>
-          </div>
         </div>
 
-        <video id="gateway-film" class="gateway-film" preload="auto" muted playsinline poster="art/gateway-first.jpg" aria-label="Gateway opening animation">
-          <source src="media/gateway-4k.mp4" type="video/mp4">
+        <video id="gateway-film" class="gateway-film" preload="auto" muted playsinline poster="art/gateway-lines-only.webp" aria-label="Text-free gateway animation">
+          <source src="media/gateway-lines-only.mp4" type="video/mp4">
         </video>
-        <video id="gateway-living" class="gateway-film gateway-living" preload="auto" muted playsinline loop poster="art/gateway-opened.webp" aria-hidden="true">
-          <source src="media/gateway-living-4k.mp4" type="video/mp4">
+        <video id="gateway-living" class="gateway-film gateway-living" preload="auto" muted playsinline loop poster="art/gateway-lines-only.webp" aria-hidden="true">
+          <source src="media/gateway-lines-loop.mp4" type="video/mp4">
         </video>
 
-        <div class="film-actions">
-          <button id="film-sound" aria-pressed="false">Sound on</button>
-          <button id="film-replay">Replay film</button>
-          <a href="#rider">Scroll to explore ↓</a>
+        <div class="film-actions" aria-label="Hero controls">
+          <button id="film-sound" aria-label="Turn sound on" aria-pressed="false">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path class="sound-wave" d="M16 9a5 5 0 0 1 0 6m2-9a9 9 0 0 1 0 12"/><path class="sound-muted" d="m17 9 5 6m0-6-5 6"/></svg>
+          </button>
+          <button id="film-replay" aria-label="Replay hero animation">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.8-3L3 11m0-6v6h6M4 13a8 8 0 0 0 14.8 3L21 13m0 6v-6h-6"/></svg>
+          </button>
+          <a href="#rider" aria-label="Scroll to explore"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a>
         </div>
       </div>
     </section>
@@ -187,6 +187,6 @@
 
   <script src="viewer.js"></script>
   <script src="work-orbit.js"></script>
-  <script src="app.js?v=motion-03"></script>
+  <script src="app.js?v=hero-lines-01"></script>
 </body>
 </html>

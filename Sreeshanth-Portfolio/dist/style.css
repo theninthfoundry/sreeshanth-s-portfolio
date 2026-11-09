@@ -239,8 +239,6 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .plane-4{right:-28%;top:-11%;width:max(82vw,86svh);z-index:2}
 .plane-5{left:4%;top:-35%;width:100%;z-index:1}
 .sun-shafts{position:absolute;inset:-50%;z-index:5;background:repeating-conic-gradient(from 12deg at 50% 50%,transparent 0deg 17deg,#fff6d759 20deg,transparent 27deg 45deg);opacity:calc(var(--bloom,0)*.4);mask-image:radial-gradient(#000,transparent 65%)}
-.flight-heading{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#213b50;opacity:var(--words,0);text-align:center;text-shadow:0 2px 16px white}
-.flight-heading span{font:clamp(38px,6vw,88px)/.9 Folio;letter-spacing:-.04em;margin-top:20px}.flight-heading em{display:block;font-family:Pen;font-size:1.2em}
 @media(prefers-reduced-motion:no-preference){
   main{background:#091d49}
   .gate{height:165svh;position:relative;z-index:5;background:transparent;pointer-events:none}
@@ -278,7 +276,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 @media(max-width:700px){.depth-stage{min-height:600px}.depth-title{top:6%;left:6%}.depth-title h2{font-size:38px}.depth-coordinate{font-size:7px;top:7%;right:6%}.depth-controls{bottom:5%;left:6%;right:6%;flex-direction:column;align-items:stretch;gap:8px}.depth-projects{justify-content:space-between;gap:1px}.depth-projects button{font-size:8px;padding:10px 6px}#depth-open{font-size:24px;justify-content:space-between}.depth-guide{bottom:23%;left:6%;font-size:7px;gap:7px}.depth-number{bottom:23%}.depth-portal{width:45vw}.depth-fallback .depth-static{width:78vw}}
 @media(prefers-reduced-motion:reduce){.work-depth{height:100svh}.depth-stage{position:relative}.depth-guide span:first-child{font-size:0}.depth-guide span:first-child:after{content:'CHOOSE A PROJECT BELOW';font-size:8px}}
 
-.scene{background:#6e97bc url(art/gateway-opened.webp) center/cover no-repeat}.gateway-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent;z-index:0;opacity:var(--film-opacity,1);will-change:opacity}.film-actions{position:absolute;z-index:9;bottom:18px;left:5%;right:5%;display:flex;align-items:center;gap:20px;color:#eee6d8;font:10px monospace;opacity:0;transition:opacity .2s;pointer-events:auto}.scene:hover .film-actions,.scene:focus-within .film-actions{opacity:1}.film-actions button{background:#0008;color:inherit;border:1px solid #ffffff50;border-radius:2px;font:inherit;padding:8px 12px}.film-actions a{margin-left:auto;background:#0008;padding:8px 12px}.gate .scene{pointer-events:auto}.gate.flight-ended .scene,.scene.flight-ended{pointer-events:none!important}@media(hover:none){.film-actions{opacity:1;bottom:10px;gap:8px;font-size:9px}}
+.scene{background:#6e97bc url(art/gateway-lines-only.webp) center/cover no-repeat}.gateway-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent;z-index:0;opacity:var(--film-opacity,1);will-change:opacity}.film-actions{position:absolute;z-index:9;bottom:18px;left:5%;right:5%;display:flex;align-items:center;gap:20px;color:#eee6d8;font:10px monospace;opacity:0;transition:opacity .2s;pointer-events:auto}.scene:hover .film-actions,.scene:focus-within .film-actions{opacity:1}.film-actions button{background:#0008;color:inherit;border:1px solid #ffffff50;border-radius:2px;font:inherit;padding:8px 12px}.film-actions a{margin-left:auto;background:#0008;padding:8px 12px}.gate .scene{pointer-events:auto}.gate.flight-ended .scene,.scene.flight-ended{pointer-events:none!important}@media(hover:none){.film-actions{opacity:1;bottom:10px;gap:8px;font-size:9px}}
 
 /* Hero refinement: edge-to-edge video, cloud occlusion, reserved chapters. */
 .gate{background:transparent}
@@ -446,12 +444,6 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   filter: blur(9px);
   opacity: calc(var(--bloom, 0) * .3);
 }
-.flight-heading {
-  letter-spacing: .035em;
-  text-shadow: 0 2px 20px #fff, 0 0 54px #fff8;
-}
-.flight-heading small { letter-spacing: .24em; }
-.flight-heading span { text-shadow: 0 3px 22px #fff9; }
 @media (max-width: 700px) {
   .plane-3 { left: -36%; top: -2%; width: 174vw; }
   .plane-4 { left: -32%; bottom: -20%; width: 172vw; }
@@ -467,3 +459,16 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 /* Keep the portal luminous but never let bloom erase the cloud relief. */
 .portal-light { opacity: calc(var(--bloom, 0) * .62); }
 .sun-shafts { opacity: calc(var(--bloom, 0) * .22); }
+
+/* Text-free gateway: retain only the film's fine linework and icon-only controls. */
+.menu-toggle{width:42px;height:42px;justify-content:center;padding:0;gap:0}
+.menu-toggle i{width:15px;height:8px}
+.film-actions{gap:10px}
+.film-actions button,.film-actions a{width:42px;height:42px;padding:0;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:50%;background:#10243e66;color:#fff;backdrop-filter:blur(8px);transition:background .2s,border-color .2s,transform .2s}
+.film-actions a{margin-left:auto}
+.film-actions button:hover,.film-actions a:hover{background:#10243eb8;border-color:#ffffffaa;transform:translateY(-2px)}
+.film-actions svg,.menu-toggle svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#film-sound .sound-muted{display:none}
+#film-sound[data-sound="on"] .sound-wave{display:none}
+#film-sound[data-sound="on"] .sound-muted{display:block}
+@media(hover:none){.film-actions{bottom:14px;gap:8px}.film-actions button,.film-actions a{width:38px;height:38px}}

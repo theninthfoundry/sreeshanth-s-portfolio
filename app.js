@@ -2,6 +2,7 @@ const menu = one('#menu');
 const toggle = one('.menu-toggle');
 function setMenu(open) {
   toggle.setAttribute('aria-expanded',String(open));
+  toggle.setAttribute('aria-label',open?'Close index':'Open index');
   menu.hidden = !open;
 }
 toggle.onclick = () => setMenu(menu.hidden);
@@ -52,7 +53,6 @@ function renderFlight(t,scene){
   scene.style.setProperty('--type-opacity',1-smooth(.04,.28,t));
   const aperture=smooth(.12,.40,t)*(1-smooth(.64,.88,t));
   crossing.style.setProperty('--bloom',aperture);
-  crossing.style.setProperty('--words',smooth(.34,.49,t)*(1-smooth(.62,.82,t)));
   clouds.forEach((cloud,i)=>{
     const pose=poses[i],delay=i*.012;
     const enter=smooth(.01+delay,.34+delay,t),exit=smooth(.50+delay*.45,.97+delay*.08,t);
@@ -116,7 +116,7 @@ async function startFilm(){
   gatewayFilm.controls=false;
   try{await gatewayFilm.play()}catch{gatewayFilm.controls=true}
 }
-one('#film-sound').onclick=()=>{gatewayFilm.muted=!gatewayFilm.muted;one('#film-sound').textContent=gatewayFilm.muted?'Sound off':'Sound on';one('#film-sound').setAttribute('aria-pressed',String(!gatewayFilm.muted))};
+one('#film-sound').onclick=()=>{gatewayFilm.muted=!gatewayFilm.muted;const button=one('#film-sound');button.setAttribute('aria-pressed',String(!gatewayFilm.muted));button.setAttribute('aria-label',gatewayFilm.muted?'Turn sound on':'Turn sound off');button.dataset.sound=gatewayFilm.muted?'off':'on'};
 one('#film-replay').onclick=startFilm;
 new IntersectionObserver(([entry])=>{
   if(!entry.isIntersecting){
