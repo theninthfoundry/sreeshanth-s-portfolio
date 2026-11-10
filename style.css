@@ -715,11 +715,14 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   opacity: 0.45;
 }
 .contour-line {
-  transition: transform 0.6s ease;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.4s ease, opacity 0.4s ease;
+  will-change: transform;
 }
-.contour-frame:hover .c1 { transform: translateY(-4px); }
-.contour-frame:hover .c3 { transform: translateY(-7px); }
-.contour-frame:hover .c5 { transform: translateY(-11px); }
+.contour-frame:hover .c1 { transform: translateY(-4px); stroke: #3a62d144; }
+.contour-frame:hover .c2 { transform: translateY(-6px); stroke: #3a62d155; }
+.contour-frame:hover .c3 { transform: translateY(-8px); stroke: #3a62d166; }
+.contour-frame:hover .c4 { transform: translateY(-11px); stroke: #3a62d177; }
+.contour-frame:hover .c5 { transform: translateY(-14px); stroke: #3a62d188; }
 
 .terrain-activity-wrap {
   position: relative;
