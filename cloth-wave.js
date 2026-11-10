@@ -19,6 +19,8 @@
   const ROWS = 60;
   const SIZE = COLS * ROWS;
   const DAMPING = 0.982;
+  const INV_COLS = 1 / (COLS - 1);
+  const INV_ROWS = 1 / (ROWS - 1);
 
   let h1 = new Float32Array(SIZE);
   let h2 = new Float32Array(SIZE);
@@ -172,3 +174,4 @@
 
   observer.observe(stage);
 })();
+
