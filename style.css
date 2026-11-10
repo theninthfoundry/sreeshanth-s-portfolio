@@ -130,7 +130,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .face-front .leaf-art{left:-100%}.face-back{transform:rotateY(180deg)}.face-back:after,.face-front:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#293b421f,transparent 40%);pointer-events:none}
 .backward .turning-leaf{left:0;transform-origin:right center}.backward .under{left:50%}.backward .face-front .leaf-art{left:0}.backward .face-back .leaf-art,.backward .under .leaf-art{left:-100%}
 .closing-stroke{width:min(40%,410px);height:35px;align-self:center;margin:-5% 0 4%;color:#eed8a2}
-.closing-stroke path{stroke-dasharray:1;stroke-dashoffset:1}.on-page .closing-stroke path{animation:engrave 1.45s .25s ease-out forwards}
+.closing-stroke path{stroke-dasharray:1;stroke-dashoffset:1}.on-page .closing-stroke path{animation:engrave 1.6s .2s cubic-bezier(.16,1,.3,1) forwards}
 .on-page .signoff,.section-head.on-page h2{animation:opening-title .85s cubic-bezier(.19,.85,.3,1) both}
 @keyframes opening-title{from{opacity:.05;transform:translateY(18px);clip-path:inset(0 0 95%)}to{opacity:1;transform:none;clip-path:inset(-10% 0 -20%)}}
 @media(max-width:680px){.signature .lettering{display:block}.rider-trace{inset:8% -10%;width:120%;height:78%}}
