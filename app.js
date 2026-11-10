@@ -191,13 +191,28 @@ one('#replay').onclick=()=>{scrollTo({top:0,behavior:'instant'});openPrelude();}
 if(document.documentElement.classList.contains('prelude-pending'))openPrelude();
 else startHero();
 
-const chapters=document.querySelectorAll('.section-head,.colophon');
+const chapters=document.querySelectorAll('.section-head,.craft-section,.outside-section,.contact-section,.colophon');
 const appear=new IntersectionObserver(entries=>{
   for(const entry of entries){
     if(entry.isIntersecting){entry.target.classList.add('on-page');appear.unobserve(entry.target);}
   }
 },{threshold:.16});
 chapters.forEach(chapter=>appear.observe(chapter));
+
+// Mount GitHub Activity Heatmap when #outside enters view
+const outsideSec = one('#outside');
+if (outsideSec) {
+  const ghObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      if (window.GitHubHeatmap) {
+        window.GitHubHeatmap.mount('#gh', { user: 'theninthfoundry' });
+      }
+      ghObserver.disconnect();
+    }
+  }, { threshold: 0.15 });
+  ghObserver.observe(outsideSec);
+}
+
 reduced.addEventListener('change',()=>{
   if(reduced.matches)one('.cloud-crossing').removeAttribute('data-active');
   schedule();
