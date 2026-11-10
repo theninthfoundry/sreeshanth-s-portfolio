@@ -47,6 +47,7 @@
   }
 
   function render(el, d, live, animate) {
+    if (!d || !Array.isArray(d.weeks) || !d.weeks.length) d = sample();
     const days = d.weeks.flat(), max = Math.max(1, ...days.map((x) => x.c)), s = stats(days);
     let months = '', lastWi = -9, prev = -1;
     d.weeks.forEach((wk, i) => {
