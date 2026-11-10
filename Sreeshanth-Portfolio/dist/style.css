@@ -687,10 +687,17 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   color: #7b8fae;
 }
 .outside-telemetry span {
-  padding: 3px 8px;
-  border: 1px solid #3a62d133;
-  background: #11224855;
+  padding: 4px 9px;
+  border: 1px solid #3a62d144;
+  background: #11224866;
   border-radius: 2px;
+  backdrop-filter: blur(4px);
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.outside-telemetry span:hover {
+  border-color: #9db8ff88;
+  color: #f4ede0;
 }
 .outside-lead {
   font: 15px/1.7 system-ui, -apple-system, sans-serif;
