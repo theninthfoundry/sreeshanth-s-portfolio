@@ -1,4 +1,5 @@
-# Sreeshanth Namireddy — Portfolio & Visual Sketchbook
+# The Ninth Foundry — Sreeshanth Namireddy
+> **Version 2.4.0** · *The Unfinished Universe* · Personal Portfolio & Digital Archive
 
 A cinematic, editorial web portfolio combining classical linework, surrealist collage, and modern WebGL depth composition.
 
