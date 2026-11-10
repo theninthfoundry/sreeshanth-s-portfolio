@@ -767,7 +767,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .terrain-meta {
   font: 11px/1 'Courier New', monospace;
   letter-spacing: 0.12em;
-  color: #7b8fae;
+  color: #9fb2cf;
 }
 
 .contour-frame .ghh {
@@ -894,7 +894,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .meta-label {
   font: 9px/1 'Courier New', monospace;
   letter-spacing: 0.18em;
-  color: #7b8fae;
+  color: #9fb2cf;
   text-transform: uppercase;
 }
 .meta-value {
