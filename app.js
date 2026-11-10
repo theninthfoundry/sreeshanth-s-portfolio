@@ -8,7 +8,19 @@ function setMenu(open) {
   menu.hidden = !open;
 }
 toggle.onclick = () => setMenu(menu.hidden);
-menu.onclick = () => setMenu(false);
+menu.onclick = event => {
+  const link = event.target.closest('a');
+  if (link && link.hash) {
+    setMenu(false);
+    const target = one(link.hash);
+    if (target) {
+      event.preventDefault();
+      target.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth' });
+    }
+  } else {
+    setMenu(false);
+  }
+};
 document.addEventListener('keydown',event => {
   if(event.key === 'Escape' && !menu.hidden){ setMenu(false); toggle.focus(); }
 });
@@ -104,6 +116,8 @@ gatewayFilm.addEventListener('ended',async()=>{
   scene.classList.add('living');
   try{await livingFilm.play()}catch{}
 });
+gatewayFilm.addEventListener('error', () => { scene.classList.add('flight-ended'); });
+livingFilm.addEventListener('error', () => { scene.classList.remove('living'); });
 const prelude=one('#prelude');
 const scene=one('.scene');
 const entryButton=one('.star-entry');

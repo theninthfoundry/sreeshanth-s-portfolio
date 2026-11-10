@@ -19,6 +19,8 @@
   const ROWS = 60;
   const SIZE = COLS * ROWS;
   const DAMPING = 0.982;
+  const INV_COLS = 1 / (COLS - 1);
+  const INV_ROWS = 1 / (ROWS - 1);
 
   let h1 = new Float32Array(SIZE);
   let h2 = new Float32Array(SIZE);
@@ -73,6 +75,7 @@
 
     if (hasMoved) {
       const dist = Math.hypot(px - lastX, py - lastY);
+      if (dist < 2.5) return;
       const strength = Math.min(dist * 0.45, 14.0);
       perturb(gx, gy, strength, 3.8);
     } else {
@@ -172,3 +175,4 @@
 
   observer.observe(stage);
 })();
+

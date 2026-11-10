@@ -65,7 +65,12 @@ header{height:60px;padding:0 3.5%;border:0;pointer-events:none}header a,header b
 .near{width:160%;left:-40%;top:88%;transform:translate3d(calc(var(--phase)*5%),calc(var(--phase)*-68%),0) scale(calc(.9 + var(--phase)*.42))}
 @media(max-width:680px){.signature{top:45%;gap:13px}.cloud{min-width:118svh}.poster-advisory{top:22%}}
 @media(prefers-reduced-motion:reduce){.cloud-crossing{display:none}.name-flourish path{stroke-dashoffset:0;animation:none}.poster-type{animation:none}}
-:root{--ink:#172e38;--rule:#a9aaa0;--gold:#e5cc91}
+:root{--ink:#172e38;--rule:#a9aaa0;--gold:#e5cc91;--foundry-indigo:#0b1830;--foundry-bone:#f4ede0;--foundry-gold:#ceb783;--foundry-cyan:#3a62d1;--foundry-ruby:#c83d32}
+html{scrollbar-color:#ceb78344 #07101f;scrollbar-width:thin}
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:#07101f}
+::-webkit-scrollbar-thumb{background:#ceb78344;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#ceb78388}
 body{color:var(--ink)}
 /* The advisory on the cover opens the unabridged first poster. */
 #open-poster{border:0;padding:0;pointer-events:auto;cursor:zoom-in;transition:filter .25s}
@@ -130,7 +135,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .face-front .leaf-art{left:-100%}.face-back{transform:rotateY(180deg)}.face-back:after,.face-front:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#293b421f,transparent 40%);pointer-events:none}
 .backward .turning-leaf{left:0;transform-origin:right center}.backward .under{left:50%}.backward .face-front .leaf-art{left:0}.backward .face-back .leaf-art,.backward .under .leaf-art{left:-100%}
 .closing-stroke{width:min(40%,410px);height:35px;align-self:center;margin:-5% 0 4%;color:#eed8a2}
-.closing-stroke path{stroke-dasharray:1;stroke-dashoffset:1}.on-page .closing-stroke path{animation:engrave 1.45s .25s ease-out forwards}
+.closing-stroke path{stroke-dasharray:1;stroke-dashoffset:1}.on-page .closing-stroke path{animation:engrave 1.6s .2s cubic-bezier(.16,1,.3,1) forwards}
 .on-page .signoff,.section-head.on-page h2{animation:opening-title .85s cubic-bezier(.19,.85,.3,1) both}
 @keyframes opening-title{from{opacity:.05;transform:translateY(18px);clip-path:inset(0 0 95%)}to{opacity:1;transform:none;clip-path:inset(-10% 0 -20%)}}
 @media(max-width:680px){.signature .lettering{display:block}.rider-trace{inset:8% -10%;width:120%;height:78%}}
@@ -284,12 +289,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .gate .portal-opening{mask-image:none;-webkit-mask-image:none}
 .ride-stage{background:#193764 url(art/bookcloth.webp) center/440px}
 .horse{transform:scale(calc((1.21 - var(--p,.5)*.2)*.85)) translateY(calc((.5 - var(--p,.5))*1.8%))}
-.future-section{position:relative;isolation:isolate;min-height:45svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:#142b58 url(art/bookcloth.webp) center/440px;color:#f3eee3;padding:48px 24px}
-.future-section:before{content:'';position:absolute;inset:-24px;z-index:-1;background:#142b58 url(art/bookcloth.webp) center/440px;filter:blur(5px);opacity:.8}
-.future-section+ .future-section{border-top:1px solid #d0b88133}
-.future-content{position:relative;z-index:1}
-.future-content h3{font:normal clamp(28px,4vw,56px)/1 Folio,serif;letter-spacing:-.05em;margin:12px 0 0;color:#f5eedb}
-.future-content h3 em{font-family:Pen,Folio,serif;font-style:normal;color:#eed7a1}
+
 @media(prefers-reduced-motion:reduce){.horse{transform:scale(.85)}.gateway-living{display:none}}
 
 .scene.portal-opening .film-actions,
@@ -530,6 +530,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   letter-spacing: -0.04em;
   color: #f4ede0;
   margin: 0 0 20px;
+  text-wrap: balance;
 }
 .craft-header h2 em {
   font-family: Pen, Folio, serif;
@@ -557,12 +558,21 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(8px);
+  will-change: transform;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s ease;
 }
 .craft-card:hover {
   transform: translateY(-6px);
   border-color: #ceb78388;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(206, 183, 131, 0.08);
+}
+.craft-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0%, rgba(206, 183, 131, 0.05), transparent 70%);
+  pointer-events: none;
 }
 .craft-visual {
   position: relative;
@@ -620,21 +630,30 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   padding-top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 8px;
   font: 11px/1.3 'Courier New', monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
 }
 .craft-spec-list div {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   color: #8fa4c0;
+  border-bottom: 1px dotted rgba(206, 183, 131, 0.12);
+  padding-bottom: 2px;
 }
 .craft-spec-list b {
   color: #f4ede0;
   font-weight: 500;
+  letter-spacing: 0.05em;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1080px) and (min-width: 721px) {
+  .craft-grid { grid-template-columns: repeat(2, 1fr); }
+  .craft-card:last-child { grid-column: span 2; }
+}
+@media (max-width: 720px) {
   .craft-grid { grid-template-columns: 1fr; }
 }
 
@@ -665,6 +684,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   letter-spacing: -0.04em;
   color: #f4ede0;
   margin: 0 0 16px;
+  text-wrap: balance;
 }
 .outside-title-group h2 em {
   font-family: Pen, Folio, serif;
@@ -681,10 +701,17 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   color: #7b8fae;
 }
 .outside-telemetry span {
-  padding: 3px 8px;
-  border: 1px solid #3a62d133;
-  background: #11224855;
+  padding: 4px 9px;
+  border: 1px solid #3a62d144;
+  background: #11224866;
   border-radius: 2px;
+  backdrop-filter: blur(4px);
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.outside-telemetry span:hover {
+  border-color: #9db8ff88;
+  color: #f4ede0;
 }
 .outside-lead {
   font: 15px/1.7 system-ui, -apple-system, sans-serif;
@@ -710,11 +737,14 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   opacity: 0.45;
 }
 .contour-line {
-  transition: transform 0.6s ease;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.4s ease, opacity 0.4s ease;
+  will-change: transform;
 }
-.contour-frame:hover .c1 { transform: translateY(-4px); }
-.contour-frame:hover .c3 { transform: translateY(-7px); }
-.contour-frame:hover .c5 { transform: translateY(-11px); }
+.contour-frame:hover .c1 { transform: translateY(-4px); stroke: #3a62d144; }
+.contour-frame:hover .c2 { transform: translateY(-6px); stroke: #3a62d155; }
+.contour-frame:hover .c3 { transform: translateY(-8px); stroke: #3a62d166; }
+.contour-frame:hover .c4 { transform: translateY(-11px); stroke: #3a62d177; }
+.contour-frame:hover .c5 { transform: translateY(-14px); stroke: #3a62d188; }
 
 .terrain-activity-wrap {
   position: relative;
@@ -752,7 +782,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .terrain-meta {
   font: 11px/1 'Courier New', monospace;
   letter-spacing: 0.12em;
-  color: #7b8fae;
+  color: #9fb2cf;
 }
 
 .contour-frame .ghh {
@@ -795,6 +825,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   letter-spacing: -0.04em;
   color: #f4ede0;
   margin: 0 0 20px;
+  text-wrap: balance;
 }
 .contact-hero-text em {
   font-family: Pen, Folio, serif;
@@ -821,12 +852,17 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   border-radius: 3px;
   color: #f4ede0;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(206, 183, 131, 0.25);
+  will-change: transform;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
 }
 .direct-btn:hover {
   transform: translateY(-4px) scale(1.02);
   border-color: #ceb783;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55), 0 0 35px rgba(206, 183, 131, 0.2);
+}
+.direct-btn:focus-visible {
+  outline: 2px solid #ceb783;
+  outline-offset: 6px;
 }
 .btn-box {
   display: flex;
@@ -874,7 +910,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 .meta-label {
   font: 9px/1 'Courier New', monospace;
   letter-spacing: 0.18em;
-  color: #7b8fae;
+  color: #9fb2cf;
   text-transform: uppercase;
 }
 .meta-value {

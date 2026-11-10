@@ -30,6 +30,8 @@
   document.addEventListener('pointerdown', () => el.classList.add('down'));
   addEventListener('pointerup', () => el.classList.remove('down'));
   document.documentElement.addEventListener('pointerleave', () => el.classList.add('out'));
+  window.addEventListener('blur', () => el.classList.add('out'));
+  document.addEventListener('visibilitychange', () => { if (document.hidden) el.classList.add('out'); });
 
   (function tick() {
     cx += (x - cx) * EASE;

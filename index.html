@@ -3,14 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="theme-color" content="#091d49">
   <meta name="description" content="The personal portfolio and visual sketchbook of Sreeshanth Namireddy.">
+  <meta property="og:title" content="The Ninth Foundry — Sreeshanth Namireddy">
+  <meta property="og:description" content="An archive of things I couldn't stop building. Systems, AI, and physical craftsmanship.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Sreeshanth Namireddy — Portfolio</title>
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css?v=hero-lines-01">
   <link rel="stylesheet" href="star-cursor.css">
   <link rel="stylesheet" href="github-heatmap.css">
   <link rel="icon" href="art/prelude/star.webp">
   <link rel="preload" as="image" href="art/prelude/star.webp">
+  <link rel="preload" href="art/roman.woff" as="font" type="font/woff" crossorigin>
   <script>
     if (!location.hash && performance.getEntriesByType('navigation')[0]?.type !== 'back_forward') {
       document.documentElement.classList.add('prelude-pending');
@@ -143,7 +151,8 @@
           <!-- Study 01: Escapement -->
           <article class="craft-card" data-cursor>
             <div class="craft-visual">
-              <svg class="craft-schematic" viewBox="0 0 400 300" aria-hidden="true">
+              <svg class="craft-schematic" viewBox="0 0 400 300" role="img" aria-label="Technical schematic of a 15-tooth Glucydur escapement wheel with pallet jewels and hairspring balance">
+                <title>Glucydur Escapement Technical Schematic</title>
                 <circle cx="200" cy="150" r="105" fill="none" stroke="#ceb78340" stroke-width="0.8" stroke-dasharray="3 4"/>
                 <circle cx="200" cy="150" r="82" fill="none" stroke="#ceb783" stroke-width="1.1"/>
                 <g stroke="#ceb783" stroke-width="1" fill="none">
@@ -190,7 +199,8 @@
           <!-- Study 02: Inconel Manifold -->
           <article class="craft-card" data-cursor>
             <div class="craft-visual">
-              <svg class="craft-schematic" viewBox="0 0 400 300" aria-hidden="true">
+              <svg class="craft-schematic" viewBox="0 0 400 300" role="img" aria-label="Technical schematic of an equal-length twin-scroll turbocharger manifold with turbine impeller blades">
+                <title>Inconel Manifold Technical Schematic</title>
                 <path d="M 60 70 C 130 70 170 120 200 170 C 230 120 270 70 340 70" fill="none" stroke="#ceb783" stroke-width="1.3"/>
                 <path d="M 90 90 C 145 90 180 135 200 170 C 220 135 255 90 310 90" fill="none" stroke="#ceb78388" stroke-width="1.1"/>
                 <path d="M 120 110 C 160 110 185 145 200 170 C 215 145 240 110 280 110" fill="none" stroke="#ceb78355" stroke-width="0.9"/>
@@ -224,7 +234,8 @@
           <!-- Study 03: Saddle Stitch -->
           <article class="craft-card" data-cursor>
             <div class="craft-visual">
-              <svg class="craft-schematic" viewBox="0 0 400 300" aria-hidden="true">
+              <svg class="craft-schematic" viewBox="0 0 400 300" role="img" aria-label="Technical schematic of a dual-needle interlocking saddle stitch through bridle leather layers">
+                <title>Dual-Needle Saddle Stitch Technical Schematic</title>
                 <rect x="50" y="110" width="300" height="38" fill="#152642" stroke="#ceb78340" stroke-width="1"/>
                 <rect x="50" y="148" width="300" height="38" fill="#102038" stroke="#ceb78340" stroke-width="1"/>
                 <line x1="50" y1="148" x2="350" y2="148" stroke="#ceb78366" stroke-width="1" stroke-dasharray="2 2"/>
