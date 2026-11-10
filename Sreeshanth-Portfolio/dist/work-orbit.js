@@ -83,6 +83,9 @@ new ResizeObserver(wake).observe(stage);document.addEventListener('visibilitycha
     }
   }
   one('#close-pop').onclick=()=>dialog.close();
+  dialog.addEventListener('close', () => {
+    one('#depth-open')?.focus({ preventScroll: true });
+  });
   dialog.addEventListener('click',e=>{
     const r=dialog.getBoundingClientRect();
     if(performance.now()-openedAt>400&&e.target===dialog&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))dialog.close();
