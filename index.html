@@ -12,7 +12,8 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <title>Sreeshanth Namireddy — Portfolio</title>
-  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="art/prelude/star.webp">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="style.css?v=hero-lines-01">
   <link rel="stylesheet" href="star-cursor.css">
   <link rel="stylesheet" href="github-heatmap.css">
@@ -32,7 +33,7 @@
       <img class="corner banana" src="art/prelude/banana.webp" alt="">
       <img class="corner racer" src="art/prelude/racer.webp" alt="">
       <img class="corner violet" src="art/prelude/violet.webp" alt="">
-      <button class="star-entry" aria-label="Enter portfolio">
+      <button type="button" class="star-entry" aria-label="Enter portfolio">
         <span class="star-art"><img src="art/prelude/star.webp" alt="Hand-drawn star logo"></span>
         <span class="enter-label">Enter portfolio <i>↗</i></span>
       </button>
@@ -43,7 +44,7 @@
     <a class="brand" href="#gate" aria-label="Sreeshanth Namireddy, home">
       <img class="nav-star" src="art/prelude/star.webp" alt="">
     </a>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Open index"><i aria-hidden="true"></i></button>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Open index"><i aria-hidden="true"></i></button>
     <nav id="menu" hidden>
       <a href="#gate">The gateway</a>
       <a href="#rider">The rider</a>
@@ -77,10 +78,10 @@
         </video>
 
         <div class="film-actions" aria-label="Hero controls">
-          <button id="film-sound" aria-label="Turn sound on" aria-pressed="false">
+          <button type="button" id="film-sound" aria-label="Turn sound on" aria-pressed="false">
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path class="sound-wave" d="M16 9a5 5 0 0 1 0 6m2-9a9 9 0 0 1 0 12"/><path class="sound-muted" d="m17 9 5 6m0-6-5 6"/></svg>
           </button>
-          <button id="film-replay" aria-label="Replay hero animation">
+          <button type="button" id="film-replay" aria-label="Replay hero animation">
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.8-3L3 11m0-6v6h6M4 13a8 8 0 0 0 14.8 3L21 13m0 6v-6h-6"/></svg>
           </button>
           <a href="#rider" aria-label="Scroll to explore"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a>
@@ -128,7 +129,7 @@
         <div class="depth-guide"><span>SCROLL TO BRING IT CLOSER</span><i></i><span>DRAG TO EXPLORE</span></div>
         <div class="depth-controls">
           <div class="depth-projects" role="group" aria-label="Select project"></div>
-          <button id="depth-open" aria-haspopup="dialog">Open Otaru <span>↗</span></button>
+          <button type="button" id="depth-open" aria-haspopup="dialog">Open Otaru <span>↗</span></button>
         </div>
         <span class="depth-number" aria-hidden="true">01 / 05</span>
       </div>
@@ -388,12 +389,12 @@
         <a href="#contact">Contact</a>
         <a href="sketchbook.html">Sketchbook ↗</a>
       </nav>
-      <button id="replay">Replay the entrance <b>↥</b></button>
+      <button type="button" id="replay">Replay the entrance <b>↥</b></button>
     </div>
   </footer>
 
   <dialog id="project-pop" aria-labelledby="project-title">
-    <button id="close-pop" aria-label="Close project card">×</button>
+    <button type="button" id="close-pop" aria-label="Close project card">×</button>
     <figure class="cover">
       <img id="cover-art" alt="">
       <figcaption>
@@ -408,14 +409,14 @@
   <dialog id="viewer" aria-labelledby="viewer-title">
     <div class="viewer-head">
       <h2 id="viewer-title"></h2>
-      <button id="close-view" aria-label="Close artwork">×</button>
+      <button type="button" id="close-view" aria-label="Close artwork">×</button>
     </div>
     <img id="view-art" alt="">
     <div class="viewer-foot">
       <span id="view-count"></span>
       <div class="controls" id="view-controls">
-        <button data-view="-1" aria-label="Previous clipping">←</button>
-        <button data-view="1" aria-label="Next clipping">→</button>
+        <button type="button" data-view="-1" aria-label="Previous clipping">←</button>
+        <button type="button" data-view="1" aria-label="Next clipping">→</button>
       </div>
     </div>
   </dialog>
