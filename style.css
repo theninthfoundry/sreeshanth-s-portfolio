@@ -530,6 +530,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   letter-spacing: -0.04em;
   color: #f4ede0;
   margin: 0 0 20px;
+  text-wrap: balance;
 }
 .craft-header h2 em {
   font-family: Pen, Folio, serif;
@@ -675,6 +676,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   letter-spacing: -0.04em;
   color: #f4ede0;
   margin: 0 0 16px;
+  text-wrap: balance;
 }
 .outside-title-group h2 em {
   font-family: Pen, Folio, serif;
@@ -815,6 +817,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   letter-spacing: -0.04em;
   color: #f4ede0;
   margin: 0 0 20px;
+  text-wrap: balance;
 }
 .contact-hero-text em {
   font-family: Pen, Folio, serif;
