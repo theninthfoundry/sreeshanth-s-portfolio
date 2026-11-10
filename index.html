@@ -23,8 +23,20 @@
   <script>
     if (!location.hash && performance.getEntriesByType('navigation')[0]?.type !== 'back_forward') {
       document.documentElement.classList.add('prelude-pending');
+      setTimeout(function() {
+        if (document.documentElement.classList.contains('prelude-pending') && !document.querySelector('#prelude')?.open) {
+          document.documentElement.classList.remove('prelude-pending');
+        }
+      }, 3000);
     }
   </script>
+  <noscript>
+    <style>
+      .prelude-pending { overflow: auto !important; background: #091d49 !important; }
+      .prelude-pending #prelude:not([open]) ~ * { visibility: visible !important; }
+      #prelude { display: none !important; }
+    </style>
+  </noscript>
 </head>
 <body>
   <dialog id="prelude" aria-label="Enter Sreeshanth Namireddy’s portfolio">

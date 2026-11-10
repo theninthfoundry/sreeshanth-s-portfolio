@@ -1,3 +1,4 @@
+(() => {
 const one = window.one || (selector => document.querySelector(selector));
 const reduced = window.reduced || matchMedia('(prefers-reduced-motion: reduce)');
 const pages = [
@@ -86,3 +87,5 @@ document.addEventListener('keydown',event=>{
     event.preventDefault();showPage(event.key==='ArrowLeft'?-1:1);
   }
 });
+
+})();
