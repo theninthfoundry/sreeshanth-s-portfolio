@@ -116,6 +116,8 @@ gatewayFilm.addEventListener('ended',async()=>{
   scene.classList.add('living');
   try{await livingFilm.play()}catch{}
 });
+gatewayFilm.addEventListener('error', () => { scene.classList.add('flight-ended'); });
+livingFilm.addEventListener('error', () => { scene.classList.remove('living'); });
 const prelude=one('#prelude');
 const scene=one('.scene');
 const entryButton=one('.star-entry');
