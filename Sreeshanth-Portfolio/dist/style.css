@@ -66,6 +66,11 @@ header{height:60px;padding:0 3.5%;border:0;pointer-events:none}header a,header b
 @media(max-width:680px){.signature{top:45%;gap:13px}.cloud{min-width:118svh}.poster-advisory{top:22%}}
 @media(prefers-reduced-motion:reduce){.cloud-crossing{display:none}.name-flourish path{stroke-dashoffset:0;animation:none}.poster-type{animation:none}}
 :root{--ink:#172e38;--rule:#a9aaa0;--gold:#e5cc91;--foundry-indigo:#0b1830;--foundry-bone:#f4ede0;--foundry-gold:#ceb783;--foundry-cyan:#3a62d1;--foundry-ruby:#c83d32}
+html{scrollbar-color:#ceb78344 #07101f;scrollbar-width:thin}
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:#07101f}
+::-webkit-scrollbar-thumb{background:#ceb78344;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#ceb78388}
 body{color:var(--ink)}
 /* The advisory on the cover opens the unabridged first poster. */
 #open-poster{border:0;padding:0;pointer-events:auto;cursor:zoom-in;transition:filter .25s}
