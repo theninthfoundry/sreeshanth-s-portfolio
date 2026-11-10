@@ -836,6 +836,10 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
   border-color: #ceb783;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55), 0 0 35px rgba(206, 183, 131, 0.2);
 }
+.direct-btn:focus-visible {
+  outline: 2px solid #ceb783;
+  outline-offset: 6px;
+}
 .btn-box {
   display: flex;
   align-items: center;
