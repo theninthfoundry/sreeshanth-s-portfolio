@@ -1,0 +1,16 @@
+{
+  "name": "The Ninth Foundry — Sreeshanth Namireddy",
+  "short_name": "Ninth Foundry",
+  "description": "An archive of systems, AI research, and things I couldn't stop building.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07101f",
+  "theme_color": "#091d49",
+  "icons": [
+    {
+      "src": "art/prelude/star.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    }
+  ]
+}
