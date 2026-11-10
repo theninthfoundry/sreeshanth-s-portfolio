@@ -1,0 +1,20 @@
+/* Star cursor: only hides the native cursor once the script has mounted
+   (class is added by star-cursor.js), so touch and reduced-motion users keep theirs. */
+.has-star-cursor,
+.has-star-cursor * { cursor: none !important; }
+
+#star-cursor {
+  position: fixed; left: 0; top: 0; z-index: 2147483000;
+  pointer-events: none; color: #fff;
+  mix-blend-mode: difference;           /* white star inverts over any background */
+  transition: opacity .3s;
+}
+#star-cursor svg {
+  width: 28px; height: 28px; margin: -14px 0 0 -14px;
+  fill: currentColor;
+  transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+}
+#star-cursor.hover svg        { transform: scale(1.9) rotate(45deg); }  /* over links, buttons, cards */
+#star-cursor.down svg         { transform: scale(.7); }                  /* pressed */
+#star-cursor.hover.down svg   { transform: scale(1.3) rotate(90deg); }
+#star-cursor.out              { opacity: 0; }                            /* pointer left the window */
