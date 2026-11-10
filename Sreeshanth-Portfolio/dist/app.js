@@ -1,3 +1,4 @@
+(() => {
 const one = window.one || (selector => document.querySelector(selector));
 const reduced = window.reduced || matchMedia('(prefers-reduced-motion: reduce)');
 const menu = one('#menu');
@@ -231,3 +232,5 @@ reduced.addEventListener('change',()=>{
   if(reduced.matches)one('.cloud-crossing').removeAttribute('data-active');
   schedule();
 });
+
+})();
