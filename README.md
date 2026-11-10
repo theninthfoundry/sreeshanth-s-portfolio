@@ -29,3 +29,10 @@ Open [http://localhost:8000](http://localhost:8000) in your browser.
 - WebGL & GLSL Shaders for 3D depth field
 - CSS Custom Properties & Responsive Viewports (`svh`/`dvh`)
 - High-Efficiency H.264 / NVENC Video Encoding
+
+## Architecture & Materiality
+
+- **Pure Vanilla Stack**: Zero framework runtime overhead; sub-millisecond DOM responsiveness.
+- **Dual Pipeline Simulation**: 60fps wave-equation cloth ripple (`cloth-wave.js`) alongside spatial 3D geometry (`work-orbit.js`).
+- **Autonomous Activity Terrain**: Edge-cached GraphQL telemetry with deterministic fallbacks (`github-heatmap.js`).
+- **Celestial Cursor Engine**: Difference-blended pointer kinematics with spring-damped trajectory smoothing (`star-cursor.js`).
