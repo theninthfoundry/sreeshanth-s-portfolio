@@ -75,6 +75,7 @@
 
     if (hasMoved) {
       const dist = Math.hypot(px - lastX, py - lastY);
+      if (dist < 2.5) return;
       const strength = Math.min(dist * 0.45, 14.0);
       perturb(gx, gy, strength, 3.8);
     } else {
