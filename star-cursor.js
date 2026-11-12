@@ -14,8 +14,31 @@
   el.innerHTML =
     '<svg viewBox="-12 -12 24 24"><path d="M0 -12Q1 -2 9 0Q1 2 0 12Q-1 2 -9 0Q-1 -2 0 -12"/></svg>';
   el.classList.add('out');
-  document.body.appendChild(el);
-  document.documentElement.classList.add('has-star-cursor');
+
+  function syncHost() {
+    const openDialog = document.querySelector('dialog[open]');
+    const isPrelude = !!(openDialog && openDialog.id === 'prelude');
+    const target = openDialog || document.body;
+    if (target && el.parentElement !== target) {
+      target.appendChild(el);
+    }
+    el.classList.toggle('prelude-cursor', isPrelude);
+  }
+
+  const mount = () => {
+    syncHost();
+    document.documentElement.classList.add('has-star-cursor');
+
+    const observer = new MutationObserver(() => syncHost());
+    observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['open'] });
+    document.addEventListener('close', syncHost, true);
+  };
+
+  if (document.body) {
+    mount();
+  } else {
+    document.addEventListener('DOMContentLoaded', mount);
+  }
 
   let x = 0, y = 0, cx = 0, cy = 0, seen = false;
 
@@ -23,6 +46,7 @@
     x = e.clientX; y = e.clientY;
     if (!seen) { cx = x; cy = y; seen = true; } // no fly-in from the corner
     el.classList.remove('out');
+    syncHost();
   }, { passive: true });
 
   document.addEventListener('pointerover', (e) =>
