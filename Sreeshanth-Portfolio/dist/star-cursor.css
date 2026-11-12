@@ -18,3 +18,11 @@
 #star-cursor.down svg         { transform: scale(.7); }                  /* pressed */
 #star-cursor.hover.down svg   { transform: scale(1.3) rotate(90deg); }
 #star-cursor.out              { opacity: 0; }                            /* pointer left the window */
+
+/* Prelude / Entry modal: luminous pure white cursor on dark prelude screen */
+#prelude #star-cursor,
+#star-cursor.prelude-cursor {
+  mix-blend-mode: normal !important;
+  color: #ffffff !important;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 1px #ffffff) !important;
+}
