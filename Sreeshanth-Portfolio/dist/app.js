@@ -92,10 +92,6 @@ function paint(){
   const progress=clamp(-gate.getBoundingClientRect().top/scrollRange);
   scene.style.setProperty('--drift',progress);
   renderFlight(progress,scene);
-  if(progress<.06&&scene.classList.contains('ready')&&ambience){
-    if(!scene.classList.contains('living'))scene.classList.add('living');
-    if(livingFilm.paused)livingFilm.play().catch(()=>{});
-  }
   const riderTop=ride.getBoundingClientRect().top;
   const p=clamp((innerHeight*.65-riderTop)/(ride.offsetHeight-innerHeight*.35));
   ride.style.setProperty('--p',p);
@@ -108,34 +104,13 @@ function schedule(){if(!pending){pending=true;requestAnimationFrame(paint)}}
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);paint();
 
 const gatewayFilm=one('#gateway-film');
-const livingFilm=one('#gateway-living');
-let ambience=false;
-
-function completeHeroFilm(){
-  if(reduced.matches||ambience)return;
-  ambience=true;
-  livingFilm.currentTime=0;
-  scene.classList.add('living');
-  livingFilm.play().catch(()=>{});
-}
-gatewayFilm.addEventListener('ended',completeHeroFilm);
-gatewayFilm.addEventListener('timeupdate',()=>{
-  if(!ambience&&gatewayFilm.duration>0&&gatewayFilm.currentTime>=gatewayFilm.duration-0.08){
-    completeHeroFilm();
-  }
-});
 gatewayFilm.addEventListener('error', () => { scene.classList.add('flight-ended'); });
-livingFilm.addEventListener('error', () => { scene.classList.remove('living'); });
 const prelude=one('#prelude');
 const scene=one('.scene');
 const entryButton=one('.star-entry');
 let leaving=false;
 function startHero(){scene.classList.add('ready')}
 async function startFilm(){
-  ambience=false;
-  scene.classList.remove('living');
-  livingFilm.pause();
-  livingFilm.currentTime=0;
   gatewayFilm.currentTime=0;
   gatewayFilm.controls=false;
   try{await gatewayFilm.play()}catch{gatewayFilm.controls=true}
@@ -145,12 +120,8 @@ one('#film-replay').onclick=startFilm;
 new IntersectionObserver(([entry])=>{
   if(!entry.isIntersecting){
     gatewayFilm.pause();
-    livingFilm.pause();
   }else if(!reduced.matches){
-    if(ambience){
-      scene.classList.add('living');
-      livingFilm.play().catch(()=>{});
-    }else if(gatewayFilm.paused&&scene.classList.contains('ready')&&!prelude.open){
+    if(gatewayFilm.paused&&scene.classList.contains('ready')&&!prelude.open&&!gatewayFilm.ended){
       gatewayFilm.play().catch(()=>{});
     }
   }
@@ -164,7 +135,7 @@ function replayEntranceMotion(){
 }
 function openPrelude(){
   prelude.style.display='';
-  gatewayFilm.pause();livingFilm.pause();ambience=false;scene.classList.remove('living');gatewayFilm.currentTime=0;
+  gatewayFilm.pause();gatewayFilm.currentTime=0;
   scene.classList.remove('ready');
   prelude.classList.remove('leaving');
   leaving=false;
