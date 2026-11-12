@@ -284,7 +284,7 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:#0b1
 
 /* Hero refinement: edge-to-edge video, cloud occlusion, reserved chapters. */
 .gate{background:transparent}
-.gateway-living{opacity:0;pointer-events:none;transition:opacity .45s ease}
+.gateway-living{opacity:0;pointer-events:none;transition:opacity 1.1s cubic-bezier(.25,1,.5,1)}
 .scene.living .gateway-living{opacity:var(--film-opacity,1)}
 .gate .portal-opening{-webkit-mask-image:none;mask-image:none}
 .ride-stage{background:#193764 url(art/bookcloth.webp) center/440px}

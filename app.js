@@ -92,7 +92,7 @@ function paint(){
   const progress=clamp(-gate.getBoundingClientRect().top/scrollRange);
   scene.style.setProperty('--drift',progress);
   renderFlight(progress,scene);
-  if(progress<.06&&scene.classList.contains('ready')&&(ambience||gatewayFilm.ended||gatewayFilm.currentTime>4.5)){
+  if(progress<.06&&scene.classList.contains('ready')&&ambience){
     if(!scene.classList.contains('living'))scene.classList.add('living');
     if(livingFilm.paused)livingFilm.play().catch(()=>{});
   }
@@ -110,12 +110,19 @@ addEventListener('scroll',schedule,{passive:true});addEventListener('resize',sch
 const gatewayFilm=one('#gateway-film');
 const livingFilm=one('#gateway-living');
 let ambience=false;
-gatewayFilm.addEventListener('ended',async()=>{
-  if(reduced.matches)return;
+
+function completeHeroFilm(){
+  if(reduced.matches||ambience)return;
   ambience=true;
   livingFilm.currentTime=0;
   scene.classList.add('living');
-  try{await livingFilm.play()}catch{}
+  livingFilm.play().catch(()=>{});
+}
+gatewayFilm.addEventListener('ended',completeHeroFilm);
+gatewayFilm.addEventListener('timeupdate',()=>{
+  if(!ambience&&gatewayFilm.duration>0&&gatewayFilm.currentTime>=gatewayFilm.duration-0.08){
+    completeHeroFilm();
+  }
 });
 gatewayFilm.addEventListener('error', () => { scene.classList.add('flight-ended'); });
 livingFilm.addEventListener('error', () => { scene.classList.remove('living'); });
@@ -126,9 +133,9 @@ let leaving=false;
 function startHero(){scene.classList.add('ready')}
 async function startFilm(){
   ambience=false;
+  scene.classList.remove('living');
   livingFilm.pause();
   livingFilm.currentTime=0;
-  scene.classList.remove('living');
   gatewayFilm.currentTime=0;
   gatewayFilm.controls=false;
   try{await gatewayFilm.play()}catch{gatewayFilm.controls=true}
@@ -140,7 +147,7 @@ new IntersectionObserver(([entry])=>{
     gatewayFilm.pause();
     livingFilm.pause();
   }else if(!reduced.matches){
-    if(ambience||gatewayFilm.ended||gatewayFilm.currentTime>4.5){
+    if(ambience){
       scene.classList.add('living');
       livingFilm.play().catch(()=>{});
     }else if(gatewayFilm.paused&&scene.classList.contains('ready')&&!prelude.open){
@@ -170,10 +177,10 @@ async function enterPortfolio(){
   if(leaving)return;
   leaving=true;
   scrollTo({top:0,behavior:'instant'});startHero();
-  await startFilm();
   if(!reduced.matches){
     const mark=one('.star-art');
     prelude.classList.add('leaving');
+    let filmStarted=false;
     await new Promise(resolve=>{
       const start=performance.now(),duration=1050;
       function fly(time){
@@ -185,13 +192,20 @@ async function enterPortfolio(){
           mark.style.setProperty('--star-zoom', zoom);
           mark.style.setProperty('--portal-flare', flare);
         }
+        if(!filmStarted&&t>=0.25){
+          filmStarted=true;
+          startFilm();
+        }
         if(t<1&&!reduced.matches)requestAnimationFrame(fly);else resolve();
       }requestAnimationFrame(fly);
     });
+    if(!filmStarted)await startFilm();
     if(mark){
       mark.style.removeProperty('--star-zoom');
       mark.style.removeProperty('--portal-flare');
     }
+  }else{
+    await startFilm();
   }
   prelude.close();
   prelude.classList.remove('leaving');
