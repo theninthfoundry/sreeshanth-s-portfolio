@@ -104,6 +104,20 @@ function schedule(){if(!pending){pending=true;requestAnimationFrame(paint)}}
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);paint();
 
 const gatewayFilm=one('#gateway-film');
+let heroCompleted=false;
+
+function holdFinalFrame(){
+  if(heroCompleted)return;
+  heroCompleted=true;
+  gatewayFilm.pause();
+}
+
+gatewayFilm.addEventListener('ended',holdFinalFrame);
+gatewayFilm.addEventListener('timeupdate',()=>{
+  if(!heroCompleted&&gatewayFilm.duration>0&&gatewayFilm.currentTime>=gatewayFilm.duration-0.15){
+    holdFinalFrame();
+  }
+});
 gatewayFilm.addEventListener('error', () => { scene.classList.add('flight-ended'); });
 const prelude=one('#prelude');
 const scene=one('.scene');
@@ -111,6 +125,7 @@ const entryButton=one('.star-entry');
 let leaving=false;
 function startHero(){scene.classList.add('ready')}
 async function startFilm(){
+  heroCompleted=false;
   gatewayFilm.currentTime=0;
   gatewayFilm.controls=false;
   try{await gatewayFilm.play()}catch{gatewayFilm.controls=true}
@@ -119,9 +134,9 @@ one('#film-sound').onclick=()=>{gatewayFilm.muted=!gatewayFilm.muted;const butto
 one('#film-replay').onclick=startFilm;
 new IntersectionObserver(([entry])=>{
   if(!entry.isIntersecting){
-    gatewayFilm.pause();
+    if(!heroCompleted)gatewayFilm.pause();
   }else if(!reduced.matches){
-    if(gatewayFilm.paused&&scene.classList.contains('ready')&&!prelude.open&&!gatewayFilm.ended){
+    if(!heroCompleted&&gatewayFilm.paused&&scene.classList.contains('ready')&&!prelude.open){
       gatewayFilm.play().catch(()=>{});
     }
   }
@@ -135,6 +150,7 @@ function replayEntranceMotion(){
 }
 function openPrelude(){
   prelude.style.display='';
+  heroCompleted=false;
   gatewayFilm.pause();gatewayFilm.currentTime=0;
   scene.classList.remove('ready');
   prelude.classList.remove('leaving');
@@ -147,6 +163,7 @@ function openPrelude(){
 async function enterPortfolio(){
   if(leaving)return;
   leaving=true;
+  heroCompleted=false;
   scrollTo({top:0,behavior:'instant'});startHero();
   if(!reduced.matches){
     const mark=one('.star-art');
@@ -187,7 +204,7 @@ async function enterPortfolio(){
 }
 entryButton.onclick=enterPortfolio;
 prelude.addEventListener('cancel',event=>{event.preventDefault();enterPortfolio();});
-one('#replay').onclick=()=>{scrollTo({top:0,behavior:'instant'});openPrelude();};
+one('#replay').onclick=()=>{heroCompleted=false;scrollTo({top:0,behavior:'instant'});openPrelude();};
 if(document.documentElement.classList.contains('prelude-pending'))openPrelude();
 else startHero();
 
